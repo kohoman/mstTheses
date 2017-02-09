@@ -1,0 +1,1360 @@
+%\iffalse
+%
+%    \begin{macrocode}
+%<*driver>
+\documentclass{article}
+\usepackage{doc}
+\usepackage[american]{babel}
+\usepackage[colorlinks,linktocpage=true]{hyperref}
+\newcommand{\file}[1]{\texttt{#1}}
+\begin{document}
+   \DocInput{theses.dtx}
+\end{document}
+%</driver>
+%    \end{macrocode}
+%\fi
+%
+% \title{Thesis and Dissertation Class Files}
+% \author{Kelly O.\ Homan, PhD\\
+%         Associate Professor of Mechanical Engineering\\
+%         Missouri University of Science \& Technology\\
+%         Rolla, Missouri 65409-0050\\
+%         \texttt{khoman@mst.edu}}
+% \date{\LaTeX'd \today}
+% \maketitle
+%
+% \tableofcontents
+%
+% \section{Preface}
+% 
+% \subsection{File Description}
+%
+% Simply \LaTeX\ the \verb|theses.ins| file to generate the class file
+% \verb|mstthesis.cls|.  This documentation file
+% (\verb|theses.dtx|)can be typeset by running it through \LaTeX. The
+% class defines commands which allow the formatting of a thesis (or
+% dissertation) based on the \LaTeX\ report class or based on the
+% campus-termed Publication Thesis Option.
+%
+% A companion template, contained in files \verb|ths.dtx| and \verb|ths.ins|,
+% provides templates illustrating the use of the class file for these
+% two thesis styles.
+%
+% \emph{Very important:} the \verb|<ps>| characters which appear in
+% the code are simply a placeholder for a percent sign (\LaTeX\
+% comment character).  These characters are used so that during the
+% generation of the code output, these lines are not removed.  Bottom
+% line, after \LaTeX'ing the \verb|ths.ins| file, do a replace all for
+% \verb|<ps>| with \verb|%| to obtain a proper \LaTeX\ file.
+% 
+% \subsection{Limitations and Bugs}
+% 
+% \begin{description} 
+% \item [Resolved (Originally added: 2011/11/03).] The first page of each
+%   individual appendix in a thesis with multiple appendices is not
+%   correctly generated in LaTeX.  At the moment, this would require
+%   generating these pages outside of LaTeX.  The associated class
+%   file will need revision in order to make these pages generate with
+%   the correct formatting.
+% \item [Resolved 2014/10/21 (Originally added 2014/08/13).] The word
+%   SECTION does not appear above the first \LaTeX\ chapter of the
+%   thesis and the first chapter following the publication chapters,
+%   as requested by OGS.
+% \end{description}
+%
+% \subsection{Acknowledgments}
+%
+% This class file is the product of significant effort from a number
+% of contributors.  A special thanks to the Office of Graduate Studies
+% during Summer 2014 for their willingness to help define and support
+% an official version of the class file: Dr.\ Allada, Vicki Hudgins,
+% Lauren Costoplos and Sharon Matson.  
+%
+% A special thanks to Phil Thiem (Mathematics) for his very careful
+% review of the class file in Fall 2011.  His suggested improvements
+% have produced a class file which very accurately follows the current
+% Missouri S\&T spec.  In particular, he was able to resolve the
+% distinct formatting requirements for single versus multiple
+% appendices.
+%
+% An additional thanks to Ben Payne (Physics) for his careful review
+% of the class file and his work in helping to match the formatting
+% guidelines being adopted by OGS in Spring 2012.
+%
+% \section{Missouri University of Science \& Technology}
+%
+% \subsection{Identification}
+%
+%    \begin{macrocode}
+%<*mstthesis>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{mstthesis}[2017/02/07 v3.0 Missouri S&T Thesis Class]
+%    \end{macrocode}
+%
+% \subsection{Initial Code}
+%
+% The \file{ifthen} package is loaded and the following 
+% boolean variables defined:
+% \begin{description}
+% \item [timesfree] used to select the Times Roman fonts which are
+%    publically available.
+% \item [timescomm] used to select the commercially-available fonts
+%    from MathTime Pro.  Note that these are not part of an
+%    open-source \LaTeX\ installation.
+% \item [double] used to specify double or single spacing 
+%   (the default). Because of a quirk in the \file{setspace}
+%   package, the variable gets used in the actual \file{thesis.tex}
+%   file, not in the class file.  The default is single spacing.
+% \item [onehalf] used to specific one-and-one-half spacing.  
+% \end{description} 
+%
+%    \begin{macrocode}
+\RequirePackage{ifthen}[2001/05/26]
+\newboolean{timesfree}
+\newboolean{timescomm}
+\newboolean{double}
+\newboolean{onehalf}
+\newboolean{firstThesisOnlyChapter}
+%    \end{macrocode}
+%
+% \subsection{Declaration of Options}
+%
+% The following options are defined for the class:
+% \begin{description}
+% \item [10pt, 11pt, 12pt] these options are passed directly to the
+%   document class.
+% \item [times] selects the publically-available Times Roman fonts for
+%    both the text and the mathematics.
+% \item [timesmtp] selects commercial Times Roman and MathTime fonts
+%   for the text and math fonts, respectively.  Only use this option
+%   if the MathTime fonts have been purchased and installed in your
+%   local texmf tree.
+% \item [doublespace] selects doublespacing.
+% \item [onehalfspace] selects one and one-half spacing.
+% \end{description}
+%
+%    \begin{macrocode}
+\DeclareOption{10pt}{%
+\PassOptionsToClass{10pt}{report}%
+}
+
+\DeclareOption{11pt}{%
+\PassOptionsToClass{11pt}{report}%
+}
+
+\DeclareOption{12pt}{%
+\PassOptionsToClass{12pt}{report}%
+}
+
+\DeclareOption{times}{%
+  \setboolean{timesfree}{true}%
+}
+
+\DeclareOption{timesmtp}{%
+  \setboolean{timescomm}{true}%
+}
+
+\DeclareOption{doublespace}{%
+  \setboolean{double}{true}
+}
+
+\DeclareOption{onehalfspace}{%
+  \setboolean{onehalf}{true}%
+}
+
+% UMR option chap
+\newif\ifchap  % true for chap option
+  \chapfalse   % false by default
+\DeclareOption{chap}{\chaptrue} % option to print "Chapter" at each new chapter
+
+%    \end{macrocode}
+%
+% \subsection{Execution of Options}
+%
+%    \begin{macrocode}
+\ProcessOptions
+%    \end{macrocode}
+%
+% \subsection{Package Loading}
+%
+% Prior to obtaining the MathTime fonts package, I had 
+% used \verb|\RequirePackage{times,mathptm,pifont}| to get
+% times font for both the text and math.
+%
+% Update (2011/10/26): the first three commands used with the MathTime
+% Pro fonts have nothing to do with the purchased fonts.  These simply
+% use the publically-available Times fonts from Adobe.  The difference
+% then, is in the companion math fonts.
+%
+% (2015/02/20): The \file{newtx} package provides Times Roman fonts
+% which are superior to the \file{mtpro2} commercial fonts so I have
+% changed both the \texttt{timescomm} and \texttt{timesfree} options
+% to being identical and both accessing the same \file{newtx} package.
+%
+%    \begin{macrocode}
+\LoadClass{report}
+
+\ifthenelse{\boolean{timescomm}}{%
+  \RequirePackage{newtxtext}[2015/02/12]
+  \RequirePackage{newtxmath}[2015/02/13]
+}{}
+
+\ifthenelse{\boolean{timesfree}}{%
+  \RequirePackage{newtxtext}[2015/02/12]
+  \RequirePackage{newtxmath}[2015/02/13]
+}{}
+%    \end{macrocode}
+%
+% Normally the following gives 1-inch right and bottom margins. 
+% However, due to use of \verb|\brokenpenalty| this is not always obeyed.
+% A slight increase in the size of the margins can sometimes be
+% sufficient to produce a result acceptable to the Graduate Studies
+% office.  A value of \texttt{9.37in} for example, instead 
+% of \texttt{9.5in}.
+%
+% \emph{Revision Note (2015/01/07,koh):} Graduate Studies is
+% requesting a one-inch margin above any heading such as
+% ``ABSTRACT''.  To achieve this, the headsep has been increased and
+% the total textheight reduced.  The settings below now produce the
+% desired one-inch margin above the page heading while preserving the
+% positioning of the pagination in the right-hand upper corner.
+%
+%    \begin{macrocode}
+\RequirePackage{geometry}[2008/12/21]
+\geometry{letterpaper,total={6in,8.875in},includehead}
+\geometry{top=0.515in,headheight=0.125in,headsep=0.4375in,left=1.515in}
+
+\RequirePackage[american]{babel}[2008/07/06]
+\RequirePackage{setspace}[2000/12/01]
+\RequirePackage{amsmath}[2000/07/18] % ,amssymb
+\RequirePackage{indentfirst}[1995/11/23]
+\RequirePackage[noprefix]{nomencl}[2005/09/22]
+
+%    \end{macrocode}
+%
+% The formatting of headings is an important part of the campus
+% specification. In the chapter spacing for example, the
+% \texttt{-0.5in} refers to the vertical spacing of the chapter in the
+% body of the thesis.
+%
+% (2014/08/13, koh). Inclusion of the tocloft and etoolbox commands
+% provide for the forced uppercase in the \LaTeX section titles appearing in
+% the table of contents.
+%
+%    \begin{macrocode}
+\RequirePackage{titlesec}[2007/08/12]
+\titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
+  {\thechapter.}{.5em}{}[\doublespacing]
+\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+\titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
+  {\thesection.}{.5em}{}[\doublespacing]
+\titleformat{\subsection}[runin]{\normalsize\bfseries}%
+  {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsection}{\parindent}{\parskip}{0pt}
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+  {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+
+\RequirePackage[titles]{tocloft}
+\RequirePackage{etoolbox}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}\chead{}\rhead{\thepage}
+\lfoot{}\cfoot{}\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\RequirePackage[authoryear,sort]{natbib}[2000/07/24]
+
+\RequirePackage[labelsep=period]{caption}[2011/11/02]
+%    \end{macrocode}
+%
+% A special thanks to Wasim I. Kayani (2015/05/09) for the suggestion
+% to make use of the nowidow package.  He recommended use of the
+% package with the following options:
+%
+%    \begin{macrocode}
+\RequirePackage[defaultlines=3,all]{nowidow}
+%    \end{macrocode}
+%
+% \subsection{Main Code}
+%
+% The following was an initial attempt at being able to select the line 
+% spacing as a class option.  However, for unknown reasons, it does
+% not work.  A similar mechanism has worked fine in other contexts.
+%
+%    \begin{macrocode}
+
+\ifthenelse{\boolean{double}}%
+{\newcommand{\paperbodysettings}{\doublespacing}}%
+{\newcommand{\paperbodysettings}{}}
+
+\ifthenelse{\boolean{onehalf}}%
+{\renewcommand{\paperbodysettings}{\onehalfspacing}}%
+{\renewcommand{\paperbodysettings}{}}
+
+\def\nopagenumber{%
+	\thispagestyle{empty}%
+}
+%    \end{macrocode}
+%
+% The paragraph indent is set by the following single command.
+%
+%    \begin{macrocode}
+\setlength{\parindent}{0.5in}
+
+%    \end{macrocode}
+%
+%
+% \subsubsection{Title Page}
+% 
+% Begin by defining an environment for the thesis title page.  
+% Two commands are introduced for specification of the thesis
+% adviser(s). As of 2011/10/22, the co-adviser specification does
+% not work correctly.  If one uncomments the original command,
+% cothadviser, and specifies a name in the brackets, the
+% titlepage is typeset with the name of memberone as the coadviser.
+% This will need some work down the road.
+%
+%    \begin{macrocode}
+\newcommand{\ThesisAdviser}[1]{\thadviser{#1}}
+\newcommand{\CoThesisAdviser}[1][false]{%
+\ifthenelse{\equal{#1}{true}}{\cothadviser{#1}}{}}
+
+\newenvironment{ThesisTitlePage}[1]{%
+  \ifthenelse{\equal{#1}{ms}}%
+     {\thesistype{1}\degree{MASTER OF SCIENCE}}%
+     {\thesistype{2}\degree{DOCTOR OF PHILOSOPHY}}}%
+{\titlepage}
+%    \end{macrocode}
+%
+%  This content is a shameless hack of a file obtained at UMR in 2003.
+%
+%    \begin{macrocode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  FOR RPI TITLEPAGE, ABSTR. TITLEPAGE & COPYRIGHT PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \def\thesistitle#1{\gdef\@thesistitle{#1}}
+ \def\author#1{\gdef\@author{#1}}
+ \def\degree#1{\gdef\@degree{#1}}
+ \def\department#1{\gdef\@department{#1}}
+ \newcount\numcomm \numcomm=1
+ \def\thesistype#1{\numcomm=#1}
+ \def\thadviser#1{\gdef\@thadviser{#1}} 
+ \def\projadviser#1{\gdef\@projadviser{#1}} \projadviser{*}
+ \def\cothadviser#1{\gdef\@cothadviser{#1}} \cothadviser{*} 
+ \def\coprojadviser#1{\gdef\@coprojadviser{#1}} \coprojadviser{*}
+ \def\doctype{\if \@projadviser *Thesis \else Project \fi}
+ \def\adviser{\if \@projadviser *\@thadviser \else \@projadviser\fi}
+ \def\coadviser{\if \@coprojadviser *\@cothadviser\else \@coprojadviser\fi}
+ \def\memberone#1{\gdef\@memberone{#1}}
+ \def\membertwo#1{\gdef\@membertwo{#1}}
+ \def\memberthree#1{\gdef\@memberthree{#1}}
+ \def\memberfour#1{\gdef\@memberfour{#1}}
+ \def\memberfive#1{\gdef\@memberfive{#1}}
+ \def\membersix#1{\gdef\@membersix{#1}}
+ \def\copyrightyear#1{\gdef\@copyrightyear{#1}} \copyrightyear{\the\year}
+ \def\graddate#1{\gdef\@graddate{#1}}
+
+\newcount\numcount
+
+
+
+\def\titlepage{%
+
+  \ifnum\numcomm<2 \typeout{---------------Masters Thesis----------}
+
+     \thispagestyle{empty}
+     \mbox{}\vspace*{\fill}
+     \begin{singlespace}
+     \begin{center}
+         \parindent=0pt
+         \vspace*{-0.25in} % ... koh (2011/09/06) ...
+        \begin{doublespace} 
+        {\uppercase\expandafter{\@thesistitle}}\\ [24pt]
+         by \\ [24pt]
+         {\uppercase\expandafter{\@author}}\\ [24pt]
+         \end{doublespace}
+         A \uppercase\expandafter{\doctype} \\[12pt]
+         Presented to the Graduate Faculty of the\\ [18pt]
+         MISSOURI UNIVERSITY OF SCIENCE AND TECHNOLOGY\\ [18pt]
+         In Partial Fulfillment of the Requirements for the Degree\\[24pt]
+         \uppercase\expandafter{\@degree}\\[18pt]
+         ~in~\\[18pt]%
+         \uppercase\expandafter{\@department} \\[18pt]
+         \@graddate\\[18pt]
+         Approved by\\
+     \vspace*{0.375in}
+     \end{center}
+     \if \coadviser *  % no coadviser
+        \begin{center}
+        \begin{minipage}{5in}
+          \begin{center}\begin{onehalfspacing}         
+          \adviser, Advisor\\
+          \@memberone \\
+          \@membertwo\\
+          \end{onehalfspacing}\end{center}
+        \end{minipage}
+        \end{center}
+     \else
+        \begin{center}
+        \begin{minipage}{5in}
+          \begin{center}\begin{onehalfspacing}         
+          \adviser, Co-advisor\\
+          \@memberone, Co-advisor \\
+          \@membertwo\\
+          \@memberthree \\
+          \end{onehalfspacing}\end{center}
+        \end{minipage}
+        \end{center}
+     \fi
+     \end{singlespace}
+     \vspace*{\fill}
+     \newpage
+     \pagestyle{myheadings}
+     \pagenumbering{roman}
+     \setcounter{page}{2}
+
+  \else  \typeout{---------------Doctoral Thesis----------}
+
+     \thispagestyle{empty}
+     \mbox{}\vspace*{\fill}
+     \begin{singlespace}
+     \begin{center}
+         \parindent=0pt
+         \vspace*{-0.25in}
+        \begin{doublespace} 
+        {\uppercase\expandafter{\@thesistitle}}\\ [20pt]
+         by \\ [20pt]
+         {\uppercase\expandafter{\@author}}\\ [20pt]
+         \end{doublespace}
+         A DISSERTATION \\[18pt]
+         Presented to the Graduate Faculty of the\\ [18pt]
+         MISSOURI UNIVERSITY OF SCIENCE AND TECHNOLOGY\\ [18pt]
+         In Partial Fulfillment of the Requirements for the Degree\\[24pt]
+         \uppercase\expandafter{\@degree}\\[18pt]
+         ~in~\\[18pt]%
+         \uppercase\expandafter{\@department} \\[18pt]
+         \@graddate\\[18pt]
+         Approved by\\
+     \vspace*{0.3in}
+     \end{center}
+     \if \coadviser *  % no coadviser
+        \begin{center}
+        \begin{minipage}{5in}
+          \begin{center}\begin{onehalfspacing}         
+          \adviser, Advisor\\
+          \@memberone \\
+          \@membertwo\\
+          \@memberthree \\
+          \@memberfour \\
+          \end{onehalfspacing}\end{center}
+        \end{minipage}
+        \end{center}
+     \else
+        \begin{center}
+        \begin{minipage}{5in}
+          \begin{center}\begin{onehalfspacing}         
+          \adviser, Co-advisor\\
+          \@memberone, Co-advisor \\
+          \@membertwo\\
+          \@memberthree \\
+          \@memberfour \\
+          \end{onehalfspacing}\end{center}
+        \end{minipage}
+        \end{center}
+     \fi
+     \end{singlespace}
+     \vspace*{\fill}
+     \newpage
+     \pagestyle{myheadings}
+     \pagenumbering{roman}
+     \setcounter{page}{2}
+
+  \fi
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection{Front Matter Environments}
+%
+%Originally, when the toc was set in double space, the vspace added
+%prior to the SECTION toc entry was 2ex.  With the change to having
+%the toc set in single space, such that the two-line entries appear as
+%single spaced, this vertical space needed to be increased.
+% 
+% 2014/01/23 - the offset of the SECTION entry in the toc was
+% requested by the OGS to be zero.  The command was therefore changed
+% from having a forced \verb|\hspace*{-2mm}| preceding the word
+% SECTION.  In addition, upon request of OGS the \verb|\bf| command was
+% removed preceding SECTION.
+%
+%    \begin{macrocode}
+
+\newcommand{\ThesisCopyrightPage}[1]{%
+  \ifthenelse{\equal{#1}{true}}%
+    {\copyrightpage}%
+  {\thispagestyle{empty}\vspace*{1in}\vfill\eject}%
+}
+
+\newenvironment{ThesisPublicationOption}[1]{%
+  \ifthenelse{\equal{#1}{ms}}%
+    {\chapter*{Publication Thesis Option}%
+      \addcontentsline{toc}{chapter}{PUBLICATION THESIS OPTION}}%
+    {\chapter*{Publication Dissertation Option}
+      \addcontentsline{toc}{chapter}{PUBLICATION DISSERTATION
+        OPTION}}%
+}{}
+
+\newenvironment{ThesisAbstract}{%
+  \chapter*{ABSTRACT}%
+  \addcontentsline{toc}{chapter}{ABSTRACT}%
+}{}
+
+\newenvironment{ThesisAcknowledgment}{%
+  \chapter*{ACKNOWLEDGMENTS}%
+  \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}%
+}{}
+
+\newenvironment{ThesisFrontMatter}{}{%
+  \addtocontents{toc}{\protect\vspace{4ex}}%
+  \addtocontents{toc}{\hbox to \textwidth{{}{SECTION\ \hfill}}}%
+}
+
+%    \end{macrocode}
+%
+% \subsubsection{Copyright Page}
+%
+%    \begin{macrocode}
+\def\copyrightpage{
+    \hbox{ }
+    \thispagestyle{empty}
+    \vfill
+    \begin{center}
+%    \copyright\ 
+     Copyright \@copyrightyear \\
+%    by \\
+    \@author \\
+    All Rights Reserved \\ [12pt]
+    \end{center}
+    \clearpage}
+%    \end{macrocode}
+%
+% \subsubsection{Table of Contents}
+%
+% The redefinition of tableofcontents is from myuiuc.sty, generated
+% for my own PhD thesis.  The code adds column headings to table of
+% contests and lists of tables and figures.
+%
+% The code defines a command which adds a Chapter entry to the table of contents
+% without a dotted leader or page number.  This entry follows the table
+% of contents entries for list of tables, figures and symbols.
+%
+% A dotted leader is added to table of contents chapter entries.
+%
+%The vspace prior to the toc entry had previously been 2ex but when
+%the change was made to have the individual contentsline entries be
+%single space, this leading space needed to be increased.
+%
+% 2014/08/13,koh. The section heading is forced to be uppercase.  Note
+% that this presumes the loading of the tocloft and etoolbox
+% packages. The dot separation is forced to be uniform.
+%
+%    \begin{macrocode}
+
+\patchcmd{\l@section}{#1}{\MakeUppercase{#1}}{}{}
+
+\renewcommand{\cftdotsep}{1}
+\newlength{\msttocindent}
+\setlength{\msttocindent}{0.5in}
+\addtolength{\cftchapindent}{\msttocindent}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+
+\newcommand{\Thesistocentry}[1]{%
+\addtocontents{toc}{\protect\vspace{4ex}}
+\addtocontents{toc}%
+{\hbox to \textwidth{{} \hspace*{-2mm}{{#1} \ \hfill}}}
+}
+
+\renewcommand{\tableofcontents}{%
+  \renewcommand{\contentsname}{TABLE OF CONTENTS}
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\contentsname
+      \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}
+  \vspace*{-0.375in}
+  \hbox to \textwidth{{} \hspace*{-2mm}{\ \hfill Page}}
+  \singlespacing\setlength{\parskip}{10\p@}
+  \@starttoc{toc}%
+  \if@restonecol\twocolumn\fi
+  }
+%    \end{macrocode}
+%
+% \subsubsection{List of Figures, Tables and Symbols}
+%
+% 2014/08/12: Per OGS request, the List of Symbols is referred to as
+% Nomenclature. 
+%
+%    \begin{macrocode}
+
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
+
+\renewcommand{\listoffigures}{%
+  \newpage%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \addcontentsline{toc}{chapter}{LIST OF ILLUSTRATIONS}
+  \renewcommand{\listfigurename}{LIST OF ILLUSTRATIONS}
+  \chapter*{\listfigurename
+    \@mkboth{\uppercase{\listfigurename}}%
+            {\uppercase{\listfigurename}}}%
+  \vspace*{-0.375in}
+  \hbox to \textwidth{{} \hspace*{-2mm}{Figure \ \hfill Page}}
+  \singlespacing\setlength{\parskip}{10\p@}
+  \@starttoc{lof}%
+  \if@restonecol\twocolumn\fi
+  \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
+  }
+
+\renewcommand{\listoftables}{%
+  \newpage%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \addcontentsline{toc}{chapter}{LIST OF TABLES}
+  \renewcommand{\listtablename}{LIST OF TABLES}
+  \chapter*{\listtablename
+    \@mkboth{\uppercase{\listtablename}}{\uppercase{\listtablename}}}%
+  \vspace*{-0.375in}
+  \hbox to \textwidth{{} \hspace*{-2mm}{Table \ \hfill Page}}
+  \singlespacing\setlength{\parskip}{10\p@}
+  \@starttoc{lot}%
+  \if@restonecol\twocolumn\fi
+  \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
+  }
+
+\newcommand{\listofsymbols}{%
+  \newpage%
+  \addcontentsline{toc}{chapter}{NOMENCLATURE}%
+  \renewcommand{\nomname}{NOMENCLATURE}%
+  \printnomenclature%
+}
+
+%    \end{macrocode}
+%
+% \subsubsection{Thesis Body and Publications}
+% 
+% In the \texttt{ThesisBody} definition, the \verb|begdef| commands start
+% the thesis body on a new page, reset the page number to arabic and
+% force a 4-line separation between the bottom of a float and the
+% subsequent text (added fall 2011).
+%
+% The template I put together for the first time in Spring 2004 used
+% the setcounter command in the base tex file to specify the pagination
+% of the individual starting pages of the publications.  This appears
+% not to work.  Apparently, these must be edited after adding the
+% nofiles command.
+%
+%    \begin{macrocode}
+\newenvironment{ThesisBody}{%
+  \newpage%
+  \pagenumbering{arabic}%
+  \setcounter{page}{1}
+  \addtolength{\textfloatsep}{+0.28125in}%
+}{}
+
+%    \end{macrocode}
+%
+% The ThesisPublications environment environment was modified in 2012
+% to include the suggestion by Ben Payne.  For his thesis, which used
+% the Publication Thesis option, the OGS requested that the word
+% SECTION appear in the toc prior to any chapters which followed the
+% Publication chapters.  This requirement was originally introduced by
+% Ben as a separate environment.  However, since the presence of this
+% in the toc is exclusive to the publication thesis option, I added it
+% as part of the trailing commands for the ThesisPublications
+% environment and removed the new environment he had added to
+% accomplish the same objective.
+%
+% (koh, 2014/04/22). The word PAPERS was changed to singular and
+% boldfacing removed.  Also, changed SECTION to normal font.
+%
+% (koh, 2017/02/07). Added commands to change the numbering format
+% of section, figure, table and equation in the block of thesis
+% publications.
+%    \begin{macrocode}
+\newenvironment{ThesisPublications}%
+  {\Thesistocentry{PAPER}%
+  \renewcommand*{\thesection}{\arabic{section}}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+  }%
+  {\newpage\addtocontents{toc}{\protect\vspace{4ex}}%
+  \addtocontents{toc}{\hbox to \textwidth{{}\hspace*{-2mm}%
+    {SECTION\ \hfill}}}}
+
+\newenvironment{ThesisOnlyChapters}%
+  {\setboolean{firstThesisOnlyChapter}{true}}{}
+
+\newcommand{\ThesisListofEntry}[2]{%
+\addtocontents{#1}{\protect\vspace{2ex}}
+\addtocontents{#1}%
+{\hbox to \textwidth{{} \hspace*{-2mm}{{#2} \ \hfill}}}
+}
+%    \end{macrocode}
+%
+%  Thank you to Ben Payne for the following addition: as of 2012 Feb
+%  22, Sharon Matson at OGS says that the appearance of the word PAPER
+%  must appear at the top of the first manuscript, but not subsequent
+%  manuscript paper chapters.
+%
+%  A second thank you to Ben Payne is for the following addition. He
+%  had a table only in his paper 6 so he wrapped the List of Tables
+%  entry in an ifthenelse command, so that only when the paper number
+%  was 6 did the Paper \# entry get written to the lot file. The code
+%  he used for this was the following:
+%  \begin{verbatim}
+%     \ifthenelse{\equal{#1}{6}}
+%      {\ThesisListofEntry{lot}{PAPER #1}}{}
+%  \end{verbatim}
+%
+% 2014/04/22,koh - changed the toc addcontentsline to be consistent
+% with that of a regular chapter so that it appears exactly as all
+% other chapters, including the appendices.
+%
+% 2017/02/07,koh - added the setcounter commands to make force each
+% manuscript (publication) chapter to restart the numbering from one.
+%
+%    \begin{macrocode}
+\newcommand{\PaperManuscript}[2]{%
+  \ifthenelse{\equal{#1}{I}}
+    {\chapter*{PAPER \\ \ \\ \ \\ \ \\#1. #2}}
+    {\chapter*{#1. #2}}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#2}%
+  \ThesisListofEntry{lof}{PAPER #1}%
+  \ThesisListofEntry{lot}{PAPER #1}%
+   \setcounter{section}{0}
+   \setcounter{figure}{0}
+   \setcounter{table}{0}
+   \setcounter{equation}{0}
+}
+%    \end{macrocode}
+%
+% 2017/01/24, koh - added commands which allow for a generic 
+% manuscript chapter, with formatting essentially identical to the
+% rest of the thesis.
+%    \begin{macrocode}
+\newcommand{\ThesisPaperAuthor}[1]{\begin{center}#1\end{center}}
+\newcommand{\ThesisPaperKeywords}[1]{\noindent\textbf{Keywords:} #1}
+\newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
+\newenvironment{ThesisPaperAbstract}%
+   {\vspace*{0.25in}\begin{center}\textbf{Abstract}\\}%
+   {\end{center}}
+
+%    \end{macrocode}
+% Two commands, which parallel the \verb|\PaperManuscript| commands,
+% are introduced for the thesis body chapters and the appendix
+% chapters, respectively.  At present, these commands merely pass the
+% name of the chapter to the chapter command, however, it allows for
+% the possibility of additional tasks preceding the typesetting of a
+% specific chapter, such as additional entries to the list of files.
+% Note that these intentionally do not input a tex file.  This is left
+% as a separate command so that the user has the flexibility of
+% including this command either in the root tex file, such as in the
+% companion template, or in the input file for a chapter.
+% \begin{verbatim}
+%     %\titleformat{\chapter}{\singlespacing\center\normalsize
+%    %  \bfseries\uppercase}{SECTION \thechapter.}{.5em}{}[\doublespacing]
+%    % \titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+%    % \chapter{#1}}%
+% \end{verbatim}
+%
+%    \begin{macrocode}
+\newcommand{\ThesisBodyChapter}[1]{%
+  \ifthenelse{\boolean{firstThesisOnlyChapter}}%
+   {\titleformat{\chapter}[display]
+      {\singlespacing\center\normalsize\bfseries}
+      {\MakeUppercase{SECTION}}
+      {3\baselineskip}
+      {\normalsize\thechapter. }
+    \titleformat{name=\chapter,numberless}[display]
+      {\singlespacing\center\normalsize\bfseries\uppercase}
+      {}
+      {0pt}
+      {\normalsize}
+    \chapter{\MakeUppercase{#1}}}
+   {\chapter{#1}}% ... end of ifthenelse block ...
+  \setboolean{firstThesisOnlyChapter}{false}
+  \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
+    {\thechapter.}{.5em}{}[\doublespacing]
+  \titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+}
+
+\newcommand{\ThesisAppendixChapter}[1]{\chapter{#1}}
+%    \end{macrocode}
+%
+% \subsubsection{Redefined Chapter commands}
+%
+% The first command definition is pulled directly from the report 
+% class.  The only changes are to comment out the addvspace commands
+% for the lof and lot.  This was flagged by Missouri S\&T thesis
+% checkers as not acceptable in Fall 2011.  Commenting out these 
+% two commands took 
+% care of the issue.  This command with the specification of parskip
+% in the listoffigures and listoftables commands gives S\&T desired 
+% spacing.
+%
+% Added an \verb|ifthenelse| statement to the command so that that
+% pagestyle is changed to empty if the page counter has the value of
+% one.  This has the effect of removing the page number on the first
+% page of the thesis body.
+%
+%    \begin{macrocode}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter.}#1}%
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \ifthenelse{\value{page}=1}{\thispagestyle{empty}}{}
+                    %\addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    %\addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+
+\renewcommand*{\l@chapter}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode %\bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \uppercase{#1}\nobreak \dotfill \nobreak\hbox to\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+%    \end{macrocode}
+%
+% \subsubsection{Appendix environment}
+%
+% The appendix environment took some effort to create as it has a
+% number of unique aspects for Missori S\&T.  The key difference is
+% that if there is one appendix, it should appear without a letter in
+% the toc and on the top of the page as a typical chapter heading.
+% However, if there are more than one appendices, it should appear on
+% its own page but only the ``chapter'' level appendix headings should
+% appear in the toc.  \emph{Very important}: the closing tocdepth
+% setting is very important because if it is set to zero when leaving
+% the environment, the list of tables and list of illustrations will
+% have no entries.  Apparently, a tocdepth of more than zero is
+% necessary for any list of illustrations or list of tables entries to
+% be included.
+%
+% The titleformat command for the multiple appendix case has now been
+% modified to center the text on the page both vertically and
+% horizontally.  A hearty thanks to Phil Thiem for figuring this one
+% out. 
+%
+% koh, 2014/04/22: changed APPENDICES to normal font.
+
+%    \begin{macrocode}
+\newenvironment{ThesisAppendix}[1]{%
+  \newpage%
+  \ifthenelse{\equal{#1}{one}}%
+    {\addcontentsline{toc}{chapter}{\MakeUppercase{Appendix}}%
+     \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}%
+     \titleformat{\chapter}{\center\normalsize\bfseries\uppercase}%
+        {}{.5em}{APPENDIX  \\ \vspace*{0.125in}\ \\}%
+     \titlespacing{\chapter}{0pt}{-0.59375in}{0.6875in}%
+     \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
+     \titleformat{\subsection}[runin]%
+        {\normalsize\bfseries}{\arabic{subsection}.}{0.5em}%
+        {}[.\hspace{0.5em}~]%
+     \titleformat{\subsubsection}[runin]%
+       {\normalsize\bfseries}%
+       {\arabic{subsection}.\arabic{subsubsection}.}%
+       {0.5em}{}[.\hspace{0.5em}~]}%
+    {\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}%
+     \titleformat{\chapter}%[block]%
+       {\vspace*{\stretch{1}}\center\normalsize\bfseries\uppercase}%
+       {APPENDIX \thechapter}{0em}%
+       {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
+     %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+     \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
+     \titleformat{\subsection}[runin]%
+       {\normalsize\bfseries}{\arabic{subsection}.}{0.5em}%
+       {}[.\hspace{0.5em}~]%
+     \titleformat{\subsubsection}[runin]%
+       {\normalsize\bfseries}%
+       {\arabic{subsection}.\arabic{subsubsection}.}{0.5em}%
+       {}[.\hspace{0.5em}~]%
+     \Thesistocentry{APPENDICES}
+     \appendix}%
+}{\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}}
+
+%    \end{macrocode}
+%
+% \subsubsection{Bibliography environment and style}
+%
+% The default bibliography environment was pulled from the 
+% base report.cls file and edited to specify the chapter name and the 
+% spacing appropriate to the thesis class.
+%
+% Specify the appropriate bst package.  Not presently used (2008/01/22).
+%
+%    \begin{macrocode}
+
+\newenvironment{ThesisBibliography}[1]{%
+  \chapter*{#1} % ... added by koh ...
+      \addcontentsline{toc}{chapter}{#1}%
+}{}
+
+\newenvironment{ThesisPaperBibliography}[1]{%
+  \section*{#1} % ... added by koh ...
+      \addcontentsline{toc}{section}{#1}%
+}{}
+
+\renewenvironment{thebibliography}[1]
+     {\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \singlespacing\setlength{\parskip}{2pt} % ... added by koh ...
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist
+      \doublespacing % ... added by koh, 2011/10/20 ...
+}
+
+%\bibliographystyle{ijhvacr}
+%    \end{macrocode}
+%
+% \subsubsection{Back Matter: Vita}
+%
+%    \begin{macrocode}
+\newenvironment{Vita}{%
+  \chapter*{Vita}%
+  \addcontentsline{toc}{chapter}{VITA}}{}
+%    \end{macrocode}
+%
+% \subsubsection{Page style for the Thesis Body}
+%
+%  The page numbers are placed in the upper right hand corner.
+%
+%    \begin{macrocode}
+
+\renewcommand{\ps@plain}{%
+  \renewcommand{\@oddhead}{\hfill\textrm{\thepage}}%
+  \renewcommand{\@evenhead}{\@oddhead}%
+  \renewcommand{\@evenfoot}{}%
+  \renewcommand{\@oddfoot}{}}
+
+\newcommand{\psplainreset}{\renewcommand{\ps@plain}{%
+  \renewcommand{\@oddhead}{\hfill\textrm{\thepage}}%
+  \renewcommand{\@evenhead}{\@oddhead}%
+  \renewcommand{\@evenfoot}{}%
+  \renewcommand{\@oddfoot}{}}
+}
+
+%    \end{macrocode}
+%
+% \subsubsection{Dotted leader formatting}
+%
+%    \begin{macrocode}
+
+% ... dot separation for leaders ...
+\renewcommand\@dotsep{4.5}
+
+%</mstthesis>
+%    \end{macrocode}
+%
+% \section{UIUC Thesis Style File}
+%  
+% Ideally, this would be put into a class file like that 
+% for the Missour S\& T thesis/dissertation.  However, in the interest
+% of time, I am going to include it wholesale so that it can be
+% revised or hacked as need be.
+%
+%    \begin{macrocode}
+%<*uiucthesis>
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+
+% Specify name of contents and reference list
+
+\renewcommand{\contentsname}{Table of Contents}
+
+\renewcommand{\bibname}{REFERENCES}
+
+
+% Set numbering of preliminary pages and thesis body.
+
+\newenvironment{preliminary}%
+  {\newpage\pagenumbering{roman}\setcounter{page}{3}}%
+  {\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
+  
+
+% Add column headings to table of contests and lists
+% of tables and figures 
+
+\renewcommand{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}
+    \hbox to \textwidth{{} \hspace*{-2mm}{\bf \ \hfill Page}}
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\renewcommand{\listoffigures}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listfigurename
+      \@mkboth{\uppercase{\listfigurename}}%
+              {\uppercase{\listfigurename}}}%
+    \hbox to \textwidth{{} \hspace*{-2mm}{\bf Figure \ \hfill Page}}
+    \@starttoc{lof}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\renewcommand{\listoftables}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listtablename
+      \@mkboth{\uppercase{\listtablename}}{\uppercase{\listtablename}}}%
+    \hbox to \textwidth{{} \hspace*{-2mm}{\bf Table \ \hfill Page}}
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+    }
+
+% Define a command which adds a Chapter entry to the table of contents
+% without a dotted leader or page number.  This entry follows the table
+% of contents entries for list of tables, figures and symbols.
+
+\newcommand{\chaptertocentry}{%
+\addtocontents{toc}{\protect\vspace{2ex}}
+\addtocontents{toc}%
+{\hbox to \textwidth{{} \hspace*{-2mm}{\bf Chapter \ \hfill}}}
+}
+
+
+% Add dotted leader to table of contents chapter entries.
+
+\renewcommand*{\l@chapter}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak \dotfill \nobreak\hbox to\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+
+% Thesis title page from file given to me by T.E. Morthland.
+
+%  ****************************************
+%  *             TITLE PAGE               *
+%  ****************************************
+%
+% Macros to set the degree type
+%
+%
+\def\phdthesis{\def\@degree{Doctor of Philosophy}}
+\def\msthesis{\def\@degree{Master of Science}}
+\def\department#1{\def\@dept{#1}}
+\def\college#1{\def\@college{#1}}
+\def\schools#1{\def\@schools{#1}}
+\def\degreeyear#1{\def\@degreeyear{#1}}
+%
+%   set initial values for title page
+%
+\msthesis
+\department{Mechanical and Industrial Engineering}
+\college{Graduate College}
+\def\@schools{}
+\def\@degreeyear{\number\year}
+%
+%   The following \maketitle should make a valid UIUC title page,
+%   assuming you've set all the fields, e.g.
+%       \title{MY THESIS}
+%       \author{JOE X. SCHMOO}
+%       \schools{B.S., Cow Flop U, 1984 \\ M.S. Illiness Tech, 1988}
+%
+\def\maketitle{
+\begingroup
+\singlespace
+%
+%   setting lineskip to 0pt insures no extra space between following
+%   vboxes.
+%
+\lineskip=0pt
+\lineskiplimit=\maxdimen
+\thispagestyle{empty}
+\setcounter{page}{0}
+%
+%   this bit of garbage allows us to paste a larger-than-allowed vbox
+%   on the first page without getting an over-full vbox. If we don't
+%   do this, we get a blank sheet of paper for the first page, followed
+%   by our over-full vbox. the \vss at the bottom of this vbox causes
+%   us to un-glue 9in of veritcal space, making TeX think that this
+%   fits on a single page. See pages 82,83 of the TeXbook for why.
+%
+\vspace*{0.5in}%
+\vtop to 0in{%
+%\vtop to 0in{\centerline{\uppercase\expandafter{\@title}}\vss}%
+\vtop to 0in{\centerline{\begin{tabular}{c}\uppercase\expandafter{\@title}\end{tabular}}\vss}%
+%
+%   skip to ``by'' and author line; measurements w.r.t top line (2.25in)
+%
+\kern 1.75in%
+\vtop to 0in{\centerline{BY}%
+  \vskip \baselineskip
+\centerline{\uppercase\expandafter{\@author}}%
+\vskip \baselineskip
+\begin{center}\begin{tabular}{c}\@schools\end{tabular}\end{center}%
+\vss}\kern -1.75in%
+%
+%   Skip down from last item (which has baseline at the top) to
+%   thesis line.
+%
+\kern 4.25in%
+\vtop to 0in{%
+\centerline{THESIS}%
+\vskip \baselineskip
+\centerline{\strut Submitted in partial fulfillment of the requirements}%
+\centerline{\strut for the degree of \@degree\ in \@dept}%
+\centerline{\strut in the \@college\ of the}%
+\centerline{\strut University of Illinois at Urbana-Champaign, \@degreeyear}%
+\vss}\kern -4.25in%
+%
+\kern 6.75in%
+\vtop to 0in{\centerline{Urbana, Illinois}\vss}%
+\kern -6.75in\vss}
+\endgroup}
+%
+
+%</uiucthesis>
+%    \end{macrocode}
+%
+\endinput       
+
+% $Log: theses.dtx,v $
+% Revision 6.4  2015/01/07 18:45:38  khoman
+% Revised the geometry settings to satisfy OGS requirements for one-inch
+% above a page heading.
+%
+% Revision 6.3  2014/10/21 19:25:23  khoman
+% Added note about <ps> character replacement.
+%
+% Revision 6.2  2014/10/21 19:06:04  khoman
+% Revised the documentation text in preparation for distribution to S&T
+% community through OGS.
+%
+% Revision 6.1  2014/10/21 18:03:16  khoman
+% Initial version for distribution to campus through OGS.  All issues
+% identified by Office of Graduate Studies have been addressed.
+%
+% Revision 5.3  2014/09/16 20:57:12  khoman
+% Conditional for appearance of SECTION at top of first page of chapter
+% works correctly.  Just need mechanism to put vspace between SECTION
+% and \thechapter.
+%
+% Revision 5.2  2014/09/16 15:23:06  khoman
+% Revised ThesisAppendix spacing after the word "APPENDIX" so that it
+% mimics the vertical spacing seen in the pto option thesis between
+% "PAPER" and the paper title.
+%
+% Revision 5.1  2014/08/13 18:00:07  khoman
+% Completed edits associated with the report-class thesis.  The
+% publication-thesis option still has a couple remaining issues to be
+% resolved.
+%
+% Revision 4.4  2014/08/12 22:06:40  khoman
+% Toc spacing is good but do not yet have section in uppercase.
+%
+% Revision 4.3  2014/08/12 17:46:47  khoman
+% Revised toc related entries for Nomenclature.
+%
+% Revision 4.2  2014/08/12 15:27:41  khoman
+% Title page now conforms to OGS-requested standard.
+%
+% Revision 4.1  2014/08/12 14:42:09  khoman
+% Initial revisions corresponding to effort with OGS to standardize the
+% campus class file.
+%
+% Revision 3.5  2014/01/23 19:04:30  khoman
+% Removed bf of word SECTION from TOC.
+%
+% Revision 3.4  2014/01/23 19:00:24  khoman
+% Removed the hspace preceding the bold face word section in the toc.
+%
+% Revision 3.3  2012/07/27 16:19:51  khoman
+% Added version dates to most of the RequirePackage commands and updated
+% the date of this class file.
+%
+% Revision 3.2  2012/07/26 16:11:02  khoman
+% Added two new commands, ThesisBodyChapter and AppendixChapter, to
+% parallel the PublicationManuscript command.  At present, these serve
+% simply to pass the respective chapter title to the chapter command.
+% However, they allow for additions to this such as adding entries in
+% the lot or lof files, as well as avoiding the need for numerous sed
+% commands in the Makefile for ths.dtx.
+%
+% Revision 3.1  2012/07/25 21:46:44  khoman
+% This new version has incorporated the changes suggested by Ben Payne
+% as part of his use of the class file to generate his PhD in Physics.
+% The changes are not major in the class file but prompted a significant
+% rework of the associated thesis template files, ths.dtx and ths.ins.
+% I have therefore chosen to index the version number as the present
+% effort has resulted in a set of significantly greater refinement.
+%
+% Revision 2.9  2011/11/04 15:48:50  khoman
+% Modified the titleformat command for the appendix chapter so that with
+% a multiple appendix thesis, the first page is centered both vertically
+% and horizontally without a page number.
+%
+% Revision 2.8  2011/11/04 15:27:43  khoman
+% Modified chapter command to make pagestyle of the first page be empty.
+%
+% Revision 2.7  2011/11/03 14:38:22  khoman
+% Added an acknowledgments subsection to the Preface.
+%
+% Revision 2.6  2011/11/03 14:30:26  khoman
+% Changes made on the suggestion and review of Phil Thiem.
+%
+% Revision 2.5  2011/10/26 20:26:57  khoman
+% Revised the commands associated with the free times fonts to reflect
+% preferred practice as outlined in the article by Walter Schmidt in the
+% PracTeX Journal (2006).
+%
+% Revision 2.4  2011/10/26 16:15:44  khoman
+% Added class options to allow for specification of either the freely
+% available times roman fonts or the commercially-available fonts from
+% MathTime Pro.
+%
+% Revision 2.3  2011/10/26 14:29:34  khoman
+% Additional changes made in the process of completing James Tinsley's
+% ms thesis, (1) each of the chapter, section, etc headings were made
+% normalsize as they request 12pt, (2) made chapter, section and
+% subsection headings single-spaced if encompassing more than one line -
+% this was done both in-text and in the table of contents.
+%
+% Revision 2.2  2011/10/26 13:26:01  khoman
+% Revised the ThesisAppendix environment so that now the table of
+% contents is generated correctly.
+%
+% Revision 2.1  2011/10/25 17:24:35  khoman
+% The class file now reproduces the thesis guidelines published by the
+% graduate affairs office.  The class file also works with the current
+% version of the ths template, both the report class template (rpc) and
+% the publication thesis option template (pto).
+%
+% Revision 1.10  2011/10/20 22:10:00  khoman
+% Changes required by first round of thesis check for James Tinsley MS
+% Thesis. The class file is correct with the maintained report class
+% thesis template.
+%
+% Revision 1.9  2011/10/10 21:17:38  khoman
+% Added note regarding the times font option.
+%
+% Revision 1.8  2011/09/07 13:22:50  khoman
+% Modified the title page so that the content is approximately centered
+% vertically.
+%
+% Revision 1.7  2011/09/06 17:26:32  khoman
+% Added indentfirst package and removed the signature lines for MS
+% committee members.
+%
+% Revision 1.6  2011/07/14 13:12:51  khoman
+% Edited the nomenclature related commands and the titlesec command.
+% The titlesec command was an especially difficult error to identify as
+% the form of the command that had been used was fine if one did not use
+% automatic chapter numbering.  This was the case for the publication
+% thesis option, however, is not for the report class thesis.  The
+% command now allows both the starred and unstarred version of the
+% chapter command to work properly.
+%
+% Revision 1.5  2008/01/23 15:31:39  khoman
+% Corrected syntax error.
+%
+% Revision 1.4  2008/01/23 15:26:54  khoman
+% Added the myuiuc.sty file content from my PhD thesis.
+%
+% Revision 1.3  2008/01/22 18:41:17  khoman
+% Removed the second block of code - no need to spend time formatting
+% content for UMR since it is a thing of the past.
+%
+% Revision 1.2  2008/01/22 18:28:08  khoman
+% Initial version incorporating the content from mymst.sty which I used
+% to produce an acceptable PhD thesis for Li-Kwen Chen.
+%
+% Revision 1.1  2008/01/22 16:15:24  khoman
+% Initial revision
+%
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+

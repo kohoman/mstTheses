@@ -1,0 +1,62 @@
+\input docstrip
+\askforoverwritefalse
+
+\generate{\file{rpctemplate.tex}{\from{ths.dtx}{rpc}}}
+\generate{\file{ptotemplate.tex}{\from{ths.dtx}{pto}}}
+\generate{\file{chapmin.tex}{\from{ths.dtx}{chapmin}}}
+\generate{\file{chapflt.tex}{\from{ths.dtx}{chapmin,addfig,addtbl}}}
+\generate{\file{chapbib.tex}{\from{ths.dtx}{chapmin,addbib}}}
+\generate{\file{chapglo.tex}{\from{ths.dtx}{chapmin,addglo}}}
+\generate{\file{chapall.tex}{\from{ths.dtx}{chapmin,%
+  addfig,addtbl,addbib,addglo}}}
+\generate{\file{pprmin.tex}{\from{ths.dtx}{pprmin}}}
+\generate{\file{pprbib.tex}{\from{ths.dtx}{pprbib}}}
+\generate{\file{pprall.tex}{\from{ths.dtx}{pprall}}}
+%\generate{\file{chapflt.tex}{\from{ths.dtx}{chapmin,addfig,addtbl}}}
+%\generate{\file{chapbib.tex}{\from{ths.dtx}{chapmin,addbib}}}
+%\generate{\file{chapglo.tex}{\from{ths.dtx}{chapmin,addglo}}}
+%\generate{\file{chapall.tex}{\from{ths.dtx}{chapmin,%
+%  addfig,addtbl,addbib,addglo}}}
+
+\endbatchfile
+
+% ****** ****** ****** ****** ****** ****** ****** ****** ******
+% $Id: ths.ins,v 3.1 2012/07/25 21:42:32 khoman Exp khoman $
+%
+% $Log: ths.ins,v $
+% Revision 3.1  2012/07/25 21:42:32  khoman
+% This is a major revision corresponding to a major rework of the
+% companion ths.dtx file.  This file now generates the pto and rpc
+% template file, as before, but then generates representative tex files
+% which contain a single chapter of content.  The content ranges from
+% minimal, which is text only, up to figs, tbls, bib citations and glo
+% entries for nomencl.  The editing of these basic files will now be
+% completed in the Makefile that processes the individual cases.
+%
+% Revision 2.2  2012/02/23 04:48:03  khoman
+% Added command to extract the rpc appendix chapter into a pto appendix
+% chapter too.
+%
+% Revision 2.1  2011/10/25 17:27:19  khoman
+% Added ptointro for the pto template.
+%
+% Revision 1.2  2011/07/14 21:28:57  khoman
+% Revised to reflect the presence of the two additional files associated
+% with the report class template.
+%
+% Revision 1.1  2008/08/25 12:24:08  khoman
+% Initial revision
+%
+% Revision 1.4  2004/01/29 19:31:26  khoman
+% Updated name of corresponding dtx file.
+%
+% Revision 1.3  2003/07/11 14:14:52  khoman
+% Added separators around revision log.
+%
+% Revision 1.2  2002/11/21 14:30:24  khoman
+% Added askforoverwritefalse command.
+%
+% Revision 1.1  2000/10/03 13:46:37  khoman
+% Initial revision
+%
+% ****** ****** ****** ****** ****** ****** ****** ****** ******

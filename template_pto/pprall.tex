@@ -1,0 +1,172 @@
+%%
+%% This is file `pprall.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ths.dtx  (with options: `pprall')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from pprall.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file ths.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+
+ % ... preamble ...
+\documentclass{article}
+
+\usepackage[nopar]{lipsum}
+\usepackage{graphicx}
+\usepackage{threeparttable}
+\usepackage{natbib}
+\usepackage[noprefix]{nomencl}
+\makenomenclature
+
+\newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
+\newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
+\newcommand{\ThesisPaperKeywords}[1]{\textbf{Keywords:} #1}
+
+\begin{document}
+
+ % ... title page ...
+
+
+\ThesisPaperAuthor{%
+ I.\ M.\ Author\\%
+ Department of Mechanical \& Aerospace Engineering\\
+ Missouri University of Science and Technology\\
+ Rolla, Missouri 65409--0050\\
+ Tel: 573--341--6622, Fax: 573--341--4115\\
+ Email: imauthor@mst.edu%
+}
+
+
+
+ % ... abstract ...
+
+\begin{ThesisPaperAbstract}
+\lipsum[50]
+\end{ThesisPaperAbstract}
+
+ % ... keywords ...
+
+\ThesisPaperKeywords{convection}
+
+ % ... nomenclature - do not edit ...
+
+
+ % ... introduction ...
+
+\section{Introduction}
+\lipsum[51-55]
+
+ % ... formulation ...
+
+\section{Problem Formulation}%
+  \label{sec:formulation}
+\lipsum[56]
+
+\subsection{Governing equations}
+
+This is my simple equation
+\begin{equation}
+\delta_i = \sqrt{t/\mathrm{Pe}}
+\end{equation}
+where $\delta$ is the thermocline
+thickness %
+\nomenclature[at]{$t$}{time}%
+\nomenclature[gd]{$\delta$}{thermocline thickness}%
+\nomenclature[si]{$i$}{inlet}%
+defined previously by \citep{bullwinkle.1990} and
+\citet{bullwinkle.1990}. \lipsum[57-60]
+
+Figure~\ref{fig:fig01} %
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=3.75in]{simple.pdf}
+  \end{center}
+  \caption{The caption of the figure.}
+\label{fig:fig01}
+\end{figure}
+\lipsum[61-65].
+
+Tables, such as Tables~\ref{tbl:tbl01} and \ref{tbl:tbl02}, %
+\begin{table}[t]
+  \caption{THE CAPTION OF THE TABLE USES CAPITAL LETTERS.}
+  \label{tbl:tbl01}
+  \begin{center}
+  \begin{tabular}{c l l}
+  \hline
+  Example & Time & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+should appear in the order of their citation and should
+\begin{table}[t]
+\begin{threeparttable}
+  \caption{THE CAPTION OF THE TABLE USES CAPITAL LETTERS.}
+  \label{tbl:tbl02}
+  \begin{center}
+\begin{tabular*}{\textwidth}{c l l} % or {tabular}
+  \hline
+  Example & Time\tnote{1} & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+\end{tabular*}
+\begin{tablenotes}
+  \item [1] The first note.
+\end{tablenotes}
+  \end{center}
+\end{threeparttable}
+\end{table}
+generally appear at the top of the page in a final manuscript.
+\lipsum[66-70]
+
+ % ... results ...
+
+\section{Results and Discussion} \label{sec:results}
+\lipsum[71-80]
+
+ % ... conclusions ...
+
+\section{Conclusions}
+\lipsum[81-85]
+
+ % ... acknowledgments ...
+
+\section*{Acknowledgments}
+\lipsum[86]
+
+ % ... nomenclature - do not edit ...
+
+
+ % ... references - bib files ...
+
+\begin{ThesisPaperBibliography}{REFERENCES}
+\bibliographystyle{plainnat}
+\bibliography{add}
+\end{ThesisPaperBibliography}
+
+ % ... end ...
+
+\end{document}
+
+
+\endinput
+%%
+%% End of file `pprall.tex'.

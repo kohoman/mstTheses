@@ -1,0 +1,132 @@
+%%
+%% This is file `chapflt.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ths.dtx  (with options: `chapmin,addfig,addtbl')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from chapflt.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file ths.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+
+
+ %% ... sample chapter ...
+
+\lipsum[6]
+
+\section{Introduction}
+\lipsum[7-9]
+
+\section{Section with Figures and Heading Which is Really Long So
+That It Produces a Two-Line Toc Entry}
+\lipsum[10]
+
+\subsection{Simple Figure with Label}
+
+\lipsum[11]
+
+Add a simple figure, Figure~\ref{fig:fig00}, to illustrate
+an entry in the list of figures. %
+\begin{figure}[tb]
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption{The caption of the figure.}
+\label{fig:fig00}
+\end{figure}%
+\lipsum[12]
+
+\subsection{Figure with psfrag Replacement}
+
+\lipsum[13].  Figure~\ref{fig:fig01} illustrates the use
+of the psfrag package to place \LaTeX\ math in a graphic.%
+\begin{figure}[tb]
+  \psfrag{x}{$x$}
+  \psfrag{y}{$y$}
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption[A figure caption which is extra long.]{A figure caption
+    which is extra long. This long caption not only demonstratees that
+    the required spacing in the list of figures is correct, but also
+    the general practice of making the list of figures (or tables)
+    entry the first sentence of the caption.}
+\label{fig:fig01}
+\end{figure}
+\lipsum[14]. The filler content is followed by a second figure,
+Figure~\ref{fig:fig02}.  %
+\begin{figure}[tb]
+  \psfrag{x}{$\hat{x}/L$}
+  \psfrag{y}{$y$}
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption{The figure caption made extra long so that the
+    required spacing in the list of figures is evident.}
+\label{fig:fig02}
+\end{figure}
+\lipsum[15]
+\section{Section with Sample Tables}
+
+\subsection{Simple Table}
+
+Finally the tables, Table~\ref{tbl:tbl01} illustrates the syntax of a
+basic table. %
+\begin{table}[tb]
+  \caption{The capitalization of the table should match that of figures.}
+  \label{tbl:tbl01}
+  \begin{center}
+  \begin{tabular}{c l l}
+  \hline
+  Example & Time & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+\lipsum[16-18]
+
+\subsection{Three-Part Table}
+
+Table~\ref{tbl:tbl02}, which illustrates the syntax of a three-part
+table which includes table notes in addition to a caption and table
+body.
+\begin{table}[tb]
+\begin{threeparttable}
+  \caption{The caption of the three-part table.}
+  \label{tbl:tbl02}
+  \begin{center}
+\begin{tabular*}{\textwidth}{c l l} % or {tabular}
+  \hline
+  Example & Time\tnote{1} & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+\end{tabular*}
+\begin{tablenotes}
+  \item [1] The first note.
+\end{tablenotes}
+  \end{center}
+\end{threeparttable}
+\end{table}
+\lipsum[19-21]
+
+
+\endinput
+%%
+%% End of file `chapflt.tex'.
