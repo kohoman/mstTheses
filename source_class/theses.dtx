@@ -318,9 +318,8 @@
 % This will need some work down the road.
 %
 %    \begin{macrocode}
-\newcommand{\ThesisAdviser}[1]{\thadviser{#1}}
-\newcommand{\CoThesisAdviser}[1][false]{%
-\ifthenelse{\equal{#1}{true}}{\cothadviser{#1}}{}}
+\newcommand{\ThesisAdvisor}[1]{\advisor{#1}}
+\newcommand{\ThesisCommittee}[1]{\committee{#1}}
 
 \newenvironment{ThesisTitlePage}[1]{%
   \ifthenelse{\equal{#1}{ms}}%
@@ -338,23 +337,14 @@
 
  \def\thesistitle#1{\gdef\@thesistitle{#1}}
  \def\author#1{\gdef\@author{#1}}
+ % ... added koh, 2017/03/15 ...
+ \def\advisor#1{\gdef\@advisor{#1}}
+ \def\committee#1{\gdef\@committee{#1}}
+ \newcount\numdeg \numdeg=1
+ \def\thesistype#1{\numdeg=#1}
+ % ... end of added commands (koh, 2017/03/15) ...
  \def\degree#1{\gdef\@degree{#1}}
  \def\department#1{\gdef\@department{#1}}
- \newcount\numcomm \numcomm=1
- \def\thesistype#1{\numcomm=#1}
- \def\thadviser#1{\gdef\@thadviser{#1}} 
- \def\projadviser#1{\gdef\@projadviser{#1}} \projadviser{*}
- \def\cothadviser#1{\gdef\@cothadviser{#1}} \cothadviser{*} 
- \def\coprojadviser#1{\gdef\@coprojadviser{#1}} \coprojadviser{*}
- \def\doctype{\if \@projadviser *Thesis \else Project \fi}
- \def\adviser{\if \@projadviser *\@thadviser \else \@projadviser\fi}
- \def\coadviser{\if \@coprojadviser *\@cothadviser\else \@coprojadviser\fi}
- \def\memberone#1{\gdef\@memberone{#1}}
- \def\membertwo#1{\gdef\@membertwo{#1}}
- \def\memberthree#1{\gdef\@memberthree{#1}}
- \def\memberfour#1{\gdef\@memberfour{#1}}
- \def\memberfive#1{\gdef\@memberfive{#1}}
- \def\membersix#1{\gdef\@membersix{#1}}
  \def\copyrightyear#1{\gdef\@copyrightyear{#1}} \copyrightyear{\the\year}
  \def\graddate#1{\gdef\@graddate{#1}}
 
@@ -364,7 +354,7 @@
 
 \def\titlepage{%
 
-  \ifnum\numcomm<2 \typeout{---------------Masters Thesis----------}
+  \ifnum\numdeg<2 \typeout{---------------Masters Thesis----------}
 
      \thispagestyle{empty}
      \mbox{}\vspace*{\fill}
@@ -377,7 +367,7 @@
          by \\ [24pt]
          {\uppercase\expandafter{\@author}}\\ [24pt]
          \end{doublespace}
-         A \uppercase\expandafter{\doctype} \\[12pt]
+         A THESIS \\[12pt]
          Presented to the Graduate Faculty of the\\ [18pt]
          MISSOURI UNIVERSITY OF SCIENCE AND TECHNOLOGY\\ [18pt]
          In Partial Fulfillment of the Requirements for the Degree\\[24pt]
@@ -388,28 +378,14 @@
          Approved by\\
      \vspace*{0.375in}
      \end{center}
-     \if \coadviser *  % no coadviser
-        \begin{center}
+     \begin{center}
         \begin{minipage}{5in}
           \begin{center}\begin{onehalfspacing}         
-          \adviser, Advisor\\
-          \@memberone \\
-          \@membertwo\\
+          \@advisor\\
+          \@committee\\
           \end{onehalfspacing}\end{center}
         \end{minipage}
-        \end{center}
-     \else
-        \begin{center}
-        \begin{minipage}{5in}
-          \begin{center}\begin{onehalfspacing}         
-          \adviser, Co-advisor\\
-          \@memberone, Co-advisor \\
-          \@membertwo\\
-          \@memberthree \\
-          \end{onehalfspacing}\end{center}
-        \end{minipage}
-        \end{center}
-     \fi
+     \end{center}
      \end{singlespace}
      \vspace*{\fill}
      \newpage
@@ -441,32 +417,15 @@
          Approved by\\
      \vspace*{0.3in}
      \end{center}
-     \if \coadviser *  % no coadviser
         \begin{center}
         \begin{minipage}{5in}
           \begin{center}\begin{onehalfspacing}         
-          \adviser, Advisor\\
-          \@memberone \\
-          \@membertwo\\
-          \@memberthree \\
-          \@memberfour \\
+          \@advisor\\
+          \@committee\\
           \end{onehalfspacing}\end{center}
         \end{minipage}
         \end{center}
-     \else
-        \begin{center}
-        \begin{minipage}{5in}
-          \begin{center}\begin{onehalfspacing}         
-          \adviser, Co-advisor\\
-          \@memberone, Co-advisor \\
-          \@membertwo\\
-          \@memberthree \\
-          \@memberfour \\
-          \end{onehalfspacing}\end{center}
-        \end{minipage}
-        \end{center}
-     \fi
-     \end{singlespace}
+      \end{singlespace}
      \vspace*{\fill}
      \newpage
      \pagestyle{myheadings}
