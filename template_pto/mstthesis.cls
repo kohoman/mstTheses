@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mstthesis}[2017/03/23 v3.1 Missouri S&T Thesis Class]
+\ProvidesClass{mstthesis}[2017/03/23 v3.2 Missouri S&T Thesis Class]
 \RequirePackage{ifthen}[2001/05/26]
 \newboolean{timesfree}
 \newboolean{timescomm}
