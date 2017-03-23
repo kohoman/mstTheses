@@ -3,16 +3,13 @@
 \documentclass[times,12pt,titlepage]{mstthesis}
 
  % ... additions to ptotemplate ...
-
+\usepackage[authoryear,sort]{natbib}
 \usepackage{docmute}
 \usepackage{graphicx}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
-
-\usepackage{natbib}
 \usepackage[sectionbib]{chapterbib}
-\sectionbib{\section*}{section}
 \bibliographystyle{plainnat}
 
  % ... end of additions to ptotemplate ...
@@ -112,8 +109,8 @@
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{One}\input{chapmin}
-\ThesisAppendixChapter{Two}\input{chapbib}
+\ThesisAppendixChapter{One Appendix Chapter}\input{chapmin}
+\ThesisAppendixChapter{Second Appendix Chapter}\input{chapbib}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...

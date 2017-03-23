@@ -34,6 +34,8 @@
 \newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
 \newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
 \newcommand{\ThesisPaperKeywords}[1]{\textbf{Keywords:} #1}
+\newenvironment{ThesisPaperBibliography}{}{}
+\newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 
 \begin{document}
 
@@ -87,7 +89,7 @@ thickness %
 \nomenclature[gd]{$\delta$}{thermocline thickness}%
 \nomenclature[si]{$i$}{inlet}%
 defined previously by \citep{bullwinkle.1990} and
-\citet{bullwinkle.1990}. \lipsum[57-60]
+\citet{bullwinkle.1991}. \lipsum[57-60]
 
 Figure~\ref{fig:fig01} %
 \begin{figure}[t]
@@ -159,12 +161,12 @@ generally appear at the top of the page in a final manuscript.
 
 \begin{ThesisPaperBibliography}{REFERENCES}
 \bibliographystyle{plainnat}
-\bibliography{add}
+\ThesisPaperReferences{add}
 \end{ThesisPaperBibliography}
 
  % ... end ...
 
-\end{document}
+ \end{document}
 
 
 \endinput

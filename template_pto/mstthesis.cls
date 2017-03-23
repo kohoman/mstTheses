@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mstthesis}[2017/02/07 v3.0 Missouri S&T Thesis Class]
+\ProvidesClass{mstthesis}[2017/03/23 v3.1 Missouri S&T Thesis Class]
 \RequirePackage{ifthen}[2001/05/26]
 \newboolean{timesfree}
 \newboolean{timescomm}
@@ -73,8 +73,8 @@
   \RequirePackage{newtxmath}[2015/02/13]
 }{}
 \RequirePackage{geometry}[2008/12/21]
-\geometry{letterpaper,total={6in,8.875in},includehead}
-\geometry{top=0.515in,headheight=0.125in,headsep=0.4375in,left=1.515in}
+\geometry{letterpaper,total={6in,8.995in}}
+\geometry{top=1.03125in,headheight=0.125in,headsep=0.3125in,left=1.515in}
 
 \RequirePackage[american]{babel}[2008/07/06]
 \RequirePackage{setspace}[2000/12/01]
@@ -85,7 +85,7 @@
 \RequirePackage{titlesec}[2007/08/12]
 \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
   {\thechapter.}{.5em}{}[\doublespacing]
-\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+\titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
@@ -105,7 +105,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\RequirePackage[authoryear,sort]{natbib}[2000/07/24]
+ %\RequirePackage[authoryear,sort]{natbib}[2000/07/24]
 
 \RequirePackage[labelsep=period]{caption}[2011/11/02]
 \RequirePackage[defaultlines=3,all]{nowidow}
@@ -122,6 +122,9 @@
 \thispagestyle{empty}%
 }
 \setlength{\parindent}{0.5in}
+
+\setcounter{tocdepth}{3}
+\addtocounter{secnumdepth}{1}
 
 \newcommand{\ThesisAdvisor}[1]{\advisor{#1}}
 \newcommand{\ThesisCommittee}[1]{\committee{#1}}
@@ -303,6 +306,7 @@
   \singlespacing\setlength{\parskip}{10\p@}
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi
+  \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
   }
 
 \setlength{\cftfigindent}{0pt}
@@ -396,8 +400,9 @@
 \newcommand{\ThesisPaperKeywords}[1]{\noindent\textbf{Keywords:} #1}
 \newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 \newenvironment{ThesisPaperAbstract}%
-   {\vspace*{0.25in}\begin{center}\textbf{Abstract}\\}%
-   {\end{center}}
+   {\vspace*{0.25in}\noindent\textbf{ABSTRACT}\\
+    \addcontentsline{toc}{section}{ABSTRACT}}%
+   {}
 
 \newcommand{\ThesisBodyChapter}[1]{%
   \ifthenelse{\boolean{firstThesisOnlyChapter}}%
@@ -416,10 +421,11 @@
   \setboolean{firstThesisOnlyChapter}{false}
   \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
     {\thechapter.}{.5em}{}[\doublespacing]
-  \titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
+  \titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
 }
 
 \newcommand{\ThesisAppendixChapter}[1]{\chapter{#1}}
+
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
                          \refstepcounter{chapter}%
                          \typeout{\@chapapp\space\thechapter.}%
@@ -462,7 +468,7 @@
     {\addcontentsline{toc}{chapter}{\MakeUppercase{Appendix}}%
      \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}%
      \titleformat{\chapter}{\center\normalsize\bfseries\uppercase}%
-        {}{.5em}{APPENDIX  \\ \vspace*{0.125in}\ \\}%
+        {}{.5em}{APPENDIX  \\ \vspace*{0.125in}\ \\ \center}%
      \titlespacing{\chapter}{0pt}{-0.59375in}{0.6875in}%
      \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
      \titleformat{\subsection}[runin]%
@@ -476,7 +482,8 @@
      \titleformat{\chapter}%[block]%
        {\vspace*{\stretch{1}}\center\normalsize\bfseries\uppercase}%
        {APPENDIX \thechapter}{0em}%
-       {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
+       {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
+ %      {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
      %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
      \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
      \titleformat{\subsection}[runin]%
@@ -492,12 +499,14 @@
 
 
 \newenvironment{ThesisBibliography}[1]{%
-  \chapter*{#1} % ... added by koh ...
+  \renewcommand{\bibname}{REFERENCES}
+ %\chapter*{#1} % ... added by koh ...
       \addcontentsline{toc}{chapter}{#1}%
 }{}
 
 \newenvironment{ThesisPaperBibliography}[1]{%
-  \section*{#1} % ... added by koh ...
+ \renewcommand{\bibname}{REFERENCES}
+ %\section*{#1} % ... added by koh ...
       \addcontentsline{toc}{section}{#1}%
 }{}
 

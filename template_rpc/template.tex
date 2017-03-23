@@ -2,6 +2,7 @@
  % ... preamble ...
 \documentclass[times,12pt,titlepage]{mstthesis}
 \doublespacing
+\usepackage[authoryear,sort]{natbib}
 \usepackage{threeparttable}
 \usepackage[final]{graphicx}
 \usepackage{psfrag}
@@ -78,14 +79,16 @@
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{One}\input{chapmin}
-\ThesisAppendixChapter{Two}\input{chapbib}
+\ThesisAppendixChapter{One Appendix Chapter}\input{chapmin}
+\ThesisAppendixChapter{Second Appendix Chapter}\input{chapbib}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...
 
 \begin{ThesisBibliography}{BIBLIOGRAPHY}
-\bibliographystyle{plainnat}
+\bibliographystyle{unsrtnat}
+ %\bibliographystyle{ieeetr}
+ %\bibliographystyle{plainnat}
 \bibliography{add}
 \end{ThesisBibliography}
 
