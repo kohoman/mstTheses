@@ -1,6 +1,19 @@
 # mst_ths
 Missouri S&amp;T Thesis Class and Templates
 
+Notes for version 3.2 (2017/03/23)
+
+Provides fixes for several issues raised by OGS reviews of spring 2017 theses and disserations.
+
+1. Provides more flexible title page specification of advisor and committee
+2. Provides correct hanging indent for authoryear citations
+3. Adds number citation proof
+4. Document margins which match the required 1" top and bottom (as closely as possible)
+5. Left justified abstract in individual manuscript chapters of publication thesis
+6. Forced uppercase of second level headings
+7. Provides numbering (and inclusion in toc) of fourth level headings
+
+----- ----- ----- -----
 Additional notes for the newest version of the mstthesis class (2017/02/07):
 
 1. The publication-option thesis relies on use of the chapterbib package in order to deal with the issue of individual reference 
