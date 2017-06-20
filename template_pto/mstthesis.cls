@@ -131,8 +131,8 @@
 
 \newenvironment{ThesisTitlePage}[1]{%
   \ifthenelse{\equal{#1}{ms}}%
-     {\thesistype{1}\degree{MASTER OF SCIENCE}}%
-     {\thesistype{2}\degree{DOCTOR OF PHILOSOPHY}}}%
+     {\thesistype{1}\GraduateDegree{MASTER OF SCIENCE}}%
+     {\thesistype{2}\GraduateDegree{DOCTOR OF PHILOSOPHY}}}%
 {\titlepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -145,7 +145,7 @@
  \newcount\numdeg \numdeg=1
  \def\thesistype#1{\numdeg=#1}
  % ... end of added commands (koh, 2017/03/15) ...
- \def\degree#1{\gdef\@degree{#1}}
+ \def\GraduateDegree#1{\gdef\@GraduateDegree{#1}}
  \def\department#1{\gdef\@department{#1}}
  \def\copyrightyear#1{\gdef\@copyrightyear{#1}} \copyrightyear{\the\year}
  \def\graddate#1{\gdef\@graddate{#1}}
@@ -171,7 +171,7 @@
          Presented to the Graduate Faculty of the\\ [18pt]
          MISSOURI UNIVERSITY OF SCIENCE AND TECHNOLOGY\\ [18pt]
          In Partial Fulfillment of the Requirements for the Degree\\[24pt]
-         \uppercase\expandafter{\@degree}\\[18pt]
+         \uppercase\expandafter{\@GraduateDegree}\\[18pt]
          ~in~\\[18pt]%
          \uppercase\expandafter{\@department} \\[18pt]
          \@graddate\\[18pt]
@@ -210,7 +210,7 @@
          Presented to the Graduate Faculty of the\\ [18pt]
          MISSOURI UNIVERSITY OF SCIENCE AND TECHNOLOGY\\ [18pt]
          In Partial Fulfillment of the Requirements for the Degree\\[24pt]
-         \uppercase\expandafter{\@degree}\\[18pt]
+         \uppercase\expandafter{\@GraduateDegree}\\[18pt]
          ~in~\\[18pt]%
          \uppercase\expandafter{\@department} \\[18pt]
          \@graddate\\[18pt]
@@ -501,7 +501,7 @@
 \newenvironment{ThesisBibliography}[1]{%
   \renewcommand{\bibname}{REFERENCES}
  %\chapter*{#1} % ... added by koh ...
-      \addcontentsline{toc}{chapter}{#1}%
+  \clearpage\addcontentsline{toc}{chapter}{#1}%
 }{}
 
 \newenvironment{ThesisPaperBibliography}[1]{%
