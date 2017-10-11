@@ -1,6 +1,20 @@
 # mst_ths
 Missouri S&amp;T Thesis Class and Templates
 
+Notes for version 3.4 (2017/10/11)
+
+Numerous revisions of both the class file and the associated templates
+to bring the formatting to current OGS standard.  The proofs generated
+by the current class and templates match the draft OGS Thesis
+Specifications now in the campus-level review process.
+
+Among other things, changes include:
+1. Addition of a bibliography style file (mstogs.bst) which produces
+desired formatting both using numbers and authoryear package options
+for natbib.
+2. TOC spacing is now consistent for all multi-line headings.
+
+----- ----- ----- -----
 Notes for version 3.2 (2017/03/23)
 
 Provides fixes for several issues raised by OGS reviews of spring 2017 theses and disserations.
