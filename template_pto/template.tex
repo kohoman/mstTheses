@@ -3,14 +3,15 @@
 \documentclass[times,12pt,titlepage]{mstthesis}
 
  % ... additions to ptotemplate ...
-\usepackage[authoryear,sort]{natbib}
+\usepackage[authoryear,sort]{natbib} % ... authoryear or numbers ...
+\setlength{\bibhang}{0.5in}
 \usepackage{docmute}
 \usepackage{graphicx}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
 \usepackage[sectionbib]{chapterbib}
-\bibliographystyle{plainnat}
+\bibliographystyle{mstogs}
 
  % ... end of additions to ptotemplate ...
 
@@ -30,7 +31,7 @@
 
 \begin{ThesisTitlePage}{ms}
 
-\author{\MakeUppercase{I. M. Author}}
+\author{\MakeUppercase{Full Legal Name}}
 
 \thesistitle{\MakeUppercase{The Title of My Work}}
 
@@ -38,9 +39,9 @@
 
  % ... thesis committee ...
 
-\ThesisAdvisor{Galileo, Co-Advisor\\ Copernicus, Co-Advisor}
+\ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
 
-\ThesisCommittee{Bernoulli\\ Laplace\\ Fourier}
+\ThesisCommittee{Daniel Bernoulli\\ Pierre-Simon Laplace\\ Joseph Fourier}
 
  % ... Graduation date.  NOT your submission date! ...
 \graddate{1685}
@@ -55,11 +56,15 @@
  % ... front matter - publication option - ms|phd...
 
 \begin{ThesisPublicationOption}{phd}
-  This thesis (or dissertation) has been prepared using the
-  Publication Option.  The content of pages x-xx will be submitted for
-  publication in the Journal of Things Important.  Opening and closing
-  chapters have been added for purposes normal to thesis/dissertation
-  writing.
+  This thesis (or dissertation*) consists of the following three
+  articles which have been submitted for publication, or will be
+  submitted for publication as follows:
+\begin{quote}\begin{description}
+\item Paper I: Pages x-xx have been submitted to ABC Journal.
+\item Paper II: Pages x-xx are intended for submission to XYZ Journal.
+\item Paper III: Pages x-xx have been accepted by 123 Journal.
+\end{description}\end{quote}
+
 \end{ThesisPublicationOption}
 
  % ... front matter - thesis abstract ...
@@ -93,15 +98,16 @@
  % ... thesis publications ...
 
 \begin{ThesisPublications}
-\PaperManuscript{I}{MY FIRST PAPER TITLE}\cbinput{pprmin}
-\PaperManuscript{II}{MY SECOND PAPER TITLE}\cbinput{pprbib}
-\PaperManuscript{III}{MY THIRD PAPER TITLE}\cbinput{pprall}
+\PaperManuscript{I}{FIRST PAPER TITLE THAT IS REALLY LONG %
+IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
+\PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprbib}
+\PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprall}
 \end{ThesisPublications}
 
  % ... conclusions chapter ...
 
 \begin{ThesisOnlyChapters}
-\ThesisBodyChapter{My Summary and Conclusions}\input{chapmin}
+\ThesisBodyChapter{Summary and Conclusions}\input{chapmin}
 \end{ThesisOnlyChapters}
 
 \end{ThesisBody}
@@ -109,13 +115,13 @@
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{One Appendix Chapter}\input{chapmin}
-\ThesisAppendixChapter{Second Appendix Chapter}\input{chapbib}
+\ThesisAppendixChapter{The First Appendix Title}\input{chapmin}
+\ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...
 
-\begin{ThesisBibliography}{BIBLIOGRAPHY}
+\begin{ThesisBibliography}{REFERENCES}
 \bibliography{add}
 \end{ThesisBibliography}
 

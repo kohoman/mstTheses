@@ -2,7 +2,8 @@
  % ... preamble ...
 \documentclass[times,12pt,titlepage]{mstthesis}
 \doublespacing
-\usepackage[authoryear,sort]{natbib}
+\usepackage[authoryear,sort]{natbib} % ... numbers or authoryear ...
+\setlength{\bibhang}{0.5in}
 \usepackage{threeparttable}
 \usepackage[final]{graphicx}
 \usepackage{psfrag}
@@ -25,7 +26,7 @@
 
  % ... title page info ...
 
-\author{\MakeUppercase{I. M. Author}}
+\author{\MakeUppercase{Full Legal Name}}
 
 \thesistitle{\MakeUppercase{The Title of My Work}}
 
@@ -33,9 +34,9 @@
 
  % ... thesis committee ...
 
-\ThesisAdvisor{Galileo, Co-Advisor\\ Copernicus, Co-Advisor}
+\ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
 
-\ThesisCommittee{Bernoulli\\ Laplace\\ Fourier}
+\ThesisCommittee{Daniel Bernoulli\\ Pierre-Simon Laplace\\ Joseph Fourier}
 
  % ... Graduation date - NOT your submission date ...
 \graddate{1685}
@@ -69,9 +70,12 @@
  % ... introduction chapter ...
 \ThesisBodyChapter{Introduction}\input{chapmin}
  % ... chapter ...
-\ThesisBodyChapter{My Literature Review}\input{chapbib}
+\ThesisBodyChapter{Literature Review}\input{chapbib}
  % ... chapter ...
-\ThesisBodyChapter{My First Contribution}\input{chapall}
+\ThesisBodyChapter{First Contribution With a Long and Complicated Title But
+  No Floats, Citations or Nomenclature}\input{chapmin}
+ % ... chapter ...
+\ThesisBodyChapter{Second Contribution}\input{chapall}
  % ... conclusions chapter ...
 \ThesisBodyChapter{Conclusions}\input{chapmin}
 
@@ -79,16 +83,18 @@
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{One Appendix Chapter}\input{chapmin}
-\ThesisAppendixChapter{Second Appendix Chapter}\input{chapbib}
+\ThesisAppendixChapter{The First Appendix Title}\input{chapmin}
+\ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...
 
-\begin{ThesisBibliography}{BIBLIOGRAPHY}
-\bibliographystyle{unsrtnat}
+\begin{ThesisBibliography}{REFERENCES}
+ %\bibliographystyle{unsrtnat}
  %\bibliographystyle{ieeetr}
  %\bibliographystyle{plainnat}
+\bibliographystyle{mstogs}
+\singlespacing
 \bibliography{add}
 \end{ThesisBibliography}
 

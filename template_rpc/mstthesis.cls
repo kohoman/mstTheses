@@ -94,6 +94,9 @@
 \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
   {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+\titleformat{\paragraph}[runin]{\normalsize\itshape}%
+  {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
 
 \RequirePackage[titles]{tocloft}
 \RequirePackage{etoolbox}
@@ -285,6 +288,11 @@
 \renewcommand{\cftchapaftersnum}{.}
 \renewcommand{\cftsecaftersnum}{.}
 \renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftsubsubsecaftersnum}{.}
+\renewcommand{\cftfigaftersnum}{.}
+\renewcommand{\cfttabaftersnum}{.}
+
+\cftsetrmarg{0.5in}
 
 \newcommand{\Thesistocentry}[1]{%
 \addtocontents{toc}{\protect\vspace{4ex}}
@@ -451,8 +459,8 @@
     \vskip 1.0em \@plus\p@
     \setlength\@tempdima{1.5em}%
     \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
+      \parindent \z@ \rightskip \@tocrmarg
+      \parfillskip -\@tocrmarg
       \leavevmode %\bfseries
       \advance\leftskip\@tempdima
       \hskip -\leftskip
