@@ -7,7 +7,7 @@ Provides fixes for several issues raised by OGS reviews of spring 2017 theses an
 
 1. Provides more flexible title page specification of advisor and committee
 2. Provides correct hanging indent for authoryear citations
-3. Adds number citation proof
+3. Adds template proofs which utilize number citation
 4. Document margins which match the required 1" top and bottom (as closely as possible)
 5. Left justified abstract in individual manuscript chapters of publication thesis
 6. Forced uppercase of second level headings
