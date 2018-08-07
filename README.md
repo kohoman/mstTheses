@@ -1,6 +1,20 @@
 # mst_ths
 Missouri S&amp;T Thesis Class and Templates
 
+
+
+Notes for version 4.0 (2018/08/07)
+
+Compatibility note (VERY IMPORTANT): the name of the class file was changed from mstthesis.cls to mstogs.cls. This means that all prior templates will, by default, load an outdated class file. From v4.0 (2018/08/07) forward, the correct class file name to be called in the root thesis/dissertation tex file is mstogs.cls.
+
+The final version of the Thesis/Dissertation Specifications included several changes not included in the version 3.4 class and templates. The present version of the class file (mstogs.cls), as well as the bibliography style file (mstogs.bst), now provide output which matches the formally-approved OGS Thesis/Dissertation Specifications that were officially approved in Spring 2018.
+
+In particular, changes include:
+1. Edits to the formatting and numbering of sectioning for both the report class thesis (rpc) and the publication-option thesis (pto),
+2. Layout for the List of Figures, Tables, etc.
+
+----- ----- ----- -----
+
 Notes for version 3.4 (2017/10/11)
 
 Numerous revisions of both the class file and the associated templates
