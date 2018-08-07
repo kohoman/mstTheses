@@ -1,12 +1,13 @@
  % -*- mode: LaTeX -*-
  % ... preamble ...
-\documentclass[times,12pt,titlepage]{mstthesis}
+\documentclass[times,12pt,titlepage]{mstogs}
 
  % ... additions to ptotemplate ...
 \usepackage[authoryear,sort]{natbib} % ... authoryear or numbers ...
 \setlength{\bibhang}{0.5in}
 \usepackage{docmute}
 \usepackage{graphicx}
+\usepackage{psfrag}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
@@ -50,13 +51,13 @@
 
  % ... copyright page - true|false ...
 
-\copyrightyear{1684}
-\ThesisCopyrightPage{false}
+\copyrightyear{1685}
+\ThesisCopyrightPage{true}
 
  % ... front matter - publication option - ms|phd...
 
-\begin{ThesisPublicationOption}{phd}
-  This thesis (or dissertation*) consists of the following three
+\begin{ThesisPublicationOption}{ms}
+  This \ThesisDissertationType\ consists of the following three
   articles which have been submitted for publication, or will be
   submitted for publication as follows:
 \begin{quote}\begin{description}
@@ -92,14 +93,14 @@
 
 \begin{ThesisOnlyChapters}
 \ThesisBodyChapter{Introduction}\input{chapmin}
-\ThesisBodyChapter{Literature Review}\input{chapmin}
+\ThesisBodyChapter{Literature Review}\input{chapflt}
 \end{ThesisOnlyChapters}
 
  % ... thesis publications ...
 
 \begin{ThesisPublications}
-\PaperManuscript{I}{FIRST PAPER TITLE THAT IS REALLY LONG %
-IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
+\PaperManuscript{I}{FIRST PAPER WITH NO REFERENCES BUT REALLY LONG %
+TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
 \PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprbib}
 \PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprall}
 \end{ThesisPublications}
@@ -107,6 +108,7 @@ IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
  % ... conclusions chapter ...
 
 \begin{ThesisOnlyChapters}
+\ThesisBodyChapter{Unpublished Content}\input{chapflt}
 \ThesisBodyChapter{Summary and Conclusions}\input{chapmin}
 \end{ThesisOnlyChapters}
 
@@ -115,7 +117,7 @@ IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{The First Appendix Title}\input{chapmin}
+\ThesisAppendixChapter{An Appendix Title}\input{chapmin}
 \ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
 \end{ThesisAppendix}
 

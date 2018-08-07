@@ -24,7 +24,7 @@
 %
 % \begin{abstract}
 % The templates contained in this \texttt{ltxdoc} file have been
-% debugged with the 2017/03/23 version of \texttt{mstthesis.cls}.
+% debugged with the 2018/08/07 version of \texttt{mstogs.cls}.
 % \end{abstract}
 %
 % \tableofcontents
@@ -151,7 +151,7 @@
 %<*rpc>
  % -*- mode: LaTeX -*-
  % ... preamble ...
-\documentclass[times,12pt,titlepage]{mstthesis}
+\documentclass[times,12pt,titlepage]{mstogs}
 \doublespacing
 \usepackage[authoryear,sort]{natbib} % ... numbers or authoryear ...
 \setlength{\bibhang}{0.5in}
@@ -200,12 +200,12 @@
 \end{ThesisTitlePage}
 %    \end{macrocode}
 %
-% \subsubsection{Copyright, Abstract, and Acknowledgments}
+% \subsubsection{Copyright, Abstract, and Acknowledgements}
 %
 %    \begin{macrocode}
  % ... copyright page - true|false ...
 
-\copyrightyear{1684}   
+\copyrightyear{1685}   
 \ThesisCopyrightPage{true}
 
  % ... front matter - thesis abstract ...
@@ -259,7 +259,7 @@
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{The First Appendix Title}\input{chapmin}
+\ThesisAppendixChapter{An Appendix Title}\input{chapmin}
 \ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
 \end{ThesisAppendix}
 
@@ -382,13 +382,14 @@
 %<*pto>
  % -*- mode: LaTeX -*-
  % ... preamble ...
-\documentclass[times,12pt,titlepage]{mstthesis}
+\documentclass[times,12pt,titlepage]{mstogs}
 
  % ... additions to ptotemplate ...
 \usepackage[authoryear,sort]{natbib} % ... authoryear or numbers ...
 \setlength{\bibhang}{0.5in}
 \usepackage{docmute}
 \usepackage{graphicx}
+\usepackage{psfrag}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
@@ -436,19 +437,19 @@
 \end{ThesisTitlePage}
 %    \end{macrocode}
 %
-% \subsubsection{Copyright, Abstract and Acknowledgments}
+% \subsubsection{Copyright, Abstract and Acknowledgements}
 %
 %    \begin{macrocode}
 
  % ... copyright page - true|false ...
 
-\copyrightyear{1684}
-\ThesisCopyrightPage{false}
+\copyrightyear{1685}
+\ThesisCopyrightPage{true}
 
  % ... front matter - publication option - ms|phd...
 
-\begin{ThesisPublicationOption}{phd}
-  This thesis (or dissertation*) consists of the following three
+\begin{ThesisPublicationOption}{ms}
+  This \ThesisDissertationType\ consists of the following three
   articles which have been submitted for publication, or will be
   submitted for publication as follows:
 \begin{quote}\begin{description}
@@ -494,14 +495,14 @@
 
 \begin{ThesisOnlyChapters}
 \ThesisBodyChapter{Introduction}\input{chapmin}
-\ThesisBodyChapter{Literature Review}\input{chapmin}
+\ThesisBodyChapter{Literature Review}\input{chapflt}
 \end{ThesisOnlyChapters}
 
  % ... thesis publications ...
 
 \begin{ThesisPublications}
-\PaperManuscript{I}{FIRST PAPER TITLE THAT IS REALLY LONG %
-IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
+\PaperManuscript{I}{FIRST PAPER WITH NO REFERENCES BUT REALLY LONG %
+TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
 \PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprbib}
 \PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprall}
 \end{ThesisPublications}
@@ -509,6 +510,7 @@ IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
  % ... conclusions chapter ...
 
 \begin{ThesisOnlyChapters}
+\ThesisBodyChapter{Unpublished Content}\input{chapflt}
 \ThesisBodyChapter{Summary and Conclusions}\input{chapmin}
 \end{ThesisOnlyChapters}
 
@@ -522,7 +524,7 @@ IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{The First Appendix Title}\input{chapmin}
+\ThesisAppendixChapter{An Appendix Title}\input{chapmin}
 \ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
 \end{ThesisAppendix}
 
@@ -561,7 +563,7 @@ IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
 
 \lipsum[6]
 
-\section{Introduction}
+\section{A SECOND-LEVEL HEADING}
 \lipsum[7-9]
 
 \subsection{A Third-Level Heading}
@@ -571,14 +573,9 @@ to once again verify the formatting}
 \lipsum[10-12]
 \subsubsection{Another fourth-level heading}
 \lipsum[10-12]
-\paragraph{A fifth-level heading also with a very long and complicated
-  title to verify the formatting}
-\lipsum[20]
-\paragraph{Another fifth-level heading}
-\lipsum[21]
 
-\subsection{Another third-level heading but with a very long and
-  complicated title to verify the formatting}
+\subsection{Another Third-Level Heading but with a Very Long and
+  Complicated Title to Verify the Formatting}
 \lipsum[13-15]
 
 \section{Discussion Using a Second-Level Heading 
@@ -657,6 +654,8 @@ Figure~\ref{fig:fig02}.  %
 %    \begin{macrocode}
 %<*addtbl>
 \section{Content with Sample Tables}
+
+\lipsum[15]
 
 \subsection{Floats with Tables}
 
@@ -780,7 +779,7 @@ as defined previously. \lipsum[26-30]
  % ... abstract ...
 
 \begin{ThesisPaperAbstract}
-\lipsum[50-51]
+\lipsum[50-52]
 \end{ThesisPaperAbstract}
 
  % ... keywords ...
@@ -801,12 +800,12 @@ as defined previously. \lipsum[26-30]
 Long So That It Produces a Two-Line Toc Entry}
 \lipsum[7-9]
 
-\subsection{A Second-Level Paper Heading}
+\subsection{A SECOND-LEVEL PAPER HEADING}
 \lipsum[10]
-\subsubsection{A third-level paper heading with a very long and
-  complicated title to once again verify the formatting}
+\subsubsection{A Third-Level Paper Heading with a Very Long and
+  Complicated Title to Once Again Verify the Formatting}
 \lipsum[10-12]
-\subsubsection{Another third-level paper heading}
+\subsubsection{Another Third-Level Paper Heading}
 \lipsum[10-12]
 \paragraph{A fourth-level paper heading also with a very long and complicated
   title to verify the formatting}
@@ -815,8 +814,8 @@ Long So That It Produces a Two-Line Toc Entry}
 \lipsum[21]
 
 
-\subsection{Another second-level paper heading but with a very long
-  and complicated title to verify the formatting}
+\subsection{ANOTHER SECOND-LEVEL PAPER HEADING BUT WITH A 
+VERY LONG AND COMPLICATED TITLE TO VERIFY THE FORMATTING}
 \lipsum[13-15]
 
  % ... formulation ...
@@ -825,7 +824,7 @@ Long So That It Produces a Two-Line Toc Entry}
   \label{sec:formulation}
 \lipsum[56]
 
-\subsection{Governing equations}
+\subsection{GOVERNING EQUATIONS}
 
 This is my simple equation
 \begin{equation}
@@ -878,7 +877,8 @@ generally appear at the top of the page in a final manuscript.
 
  % ... acknowledgments ...
 
-\section*{Acknowledgments}
+\section*{Acknowledgements}      
+\addcontentsline{toc}{section}{Acknowledgements}
 \lipsum[2]
 
  % ... references - bib files ...
@@ -951,7 +951,7 @@ generally appear at the top of the page in a final manuscript.
   \label{sec:formulation}
 
 \lipsum[56]
-\subsection{Governing equations}
+\subsection{GOVERNING EQUATIONS}
 
 This is my simple equation
 \begin{equation}
@@ -1007,7 +1007,8 @@ generally appear at the top of the page in a final manuscript.
 
  % ... acknowledgments ...
 
-\section*{Acknowledgments}
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
 \lipsum[86]
 
  % ... references - bib files ...
@@ -1093,7 +1094,7 @@ generally appear at the top of the page in a final manuscript.
   \label{sec:formulation}
 \lipsum[56]
 
-\subsection{Governing equations}
+\subsection{GOVERNING EQUATIONS}
 
 This is my simple equation
 \begin{equation}
@@ -1121,7 +1122,7 @@ Figure~\ref{fig:fig01} %
 
 Tables, such as Tables~\ref{tbl:tbl01} and \ref{tbl:tbl02}, %
 \begin{table}[t]
-  \caption{THE CAPTION OF THE TABLE USES CAPITAL LETTERS.}
+  \caption{The caption of the table uses capital letters.}
   \label{tbl:tbl01}
   \begin{center}
   \begin{tabular}{c l l}
@@ -1137,7 +1138,7 @@ Tables, such as Tables~\ref{tbl:tbl01} and \ref{tbl:tbl02}, %
 should appear in the order of their citation and should
 \begin{table}[t]
 \begin{threeparttable}
-  \caption{THE CAPTION OF THE TABLE USES CAPITAL LETTERS.}
+  \caption{The caption of the table uses capital letters.}
   \label{tbl:tbl02}
   \begin{center}
 \begin{tabular*}{\textwidth}{c l l} % or {tabular}
@@ -1169,7 +1170,8 @@ generally appear at the top of the page in a final manuscript.
 
  % ... acknowledgments ...
 
-\section*{Acknowledgments}
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
 \lipsum[86]
 
  % ... nomenclature - do not edit ...

@@ -30,7 +30,7 @@
 % \subsection{File Description}
 %
 % Simply \LaTeX\ the \verb|theses.ins| file to generate the class file
-% \verb|mstthesis.cls|.  This documentation file
+% \verb|mstogs.cls|.  This documentation file
 % (\verb|theses.dtx|)can be typeset by running it through \LaTeX. The
 % class defines commands which allow the formatting of a thesis (or
 % dissertation) based on the \LaTeX\ report class or based on the
@@ -66,9 +66,15 @@
 %
 % This class file is the product of significant effort from a number
 % of contributors.  A special thanks to the Office of Graduate Studies
-% during Summer 2014 for their willingness to help define and support
+% during Summer 2014 for their willingness to begin the process of
+% helping to define and support
 % an official version of the class file: Dr.\ Allada, Vicki Hudgins,
 % Lauren Costoplos and Sharon Matson.  
+%
+% A special additional thanks to Sharon Matson, Kathy Wagner and Jade
+% Sinnott for their efforts to define a new campus thesis/dissertation
+% specification, provide reviews of the \LaTeX\ template and finally,
+% for carrying this new specification through to formal campus approval.
 %
 % A special thanks to Phil Thiem (Mathematics) for his very careful
 % review of the class file in Fall 2011.  His suggested improvements
@@ -86,9 +92,10 @@
 % \subsection{Identification}
 %
 %    \begin{macrocode}
-%<*mstthesis>
+%<*mstogs>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mstthesis}[2017/03/23 v3.2 Missouri S&T Thesis Class]
+\ProvidesClass{mstogs}[2018/08/07 v4.0 %
+   Missouri S&T Office of Graduate Studies Thesis/Dissertation Class]
 %    \end{macrocode}
 %
 % \subsection{Initial Code}
@@ -464,6 +471,8 @@
 %
 %    \begin{macrocode}
 
+\newcommand{\ThesisDissertationType}{thesis}
+
 \newcommand{\ThesisCopyrightPage}[1]{%
   \ifthenelse{\equal{#1}{true}}%
     {\copyrightpage}%
@@ -476,7 +485,8 @@
       \addcontentsline{toc}{chapter}{PUBLICATION THESIS OPTION}}%
     {\chapter*{Publication Dissertation Option}
       \addcontentsline{toc}{chapter}{PUBLICATION DISSERTATION
-        OPTION}}%
+        OPTION}
+      \renewcommand{\ThesisDissertationType}{dissertation}}%
 }{}
 
 \newenvironment{ThesisAbstract}{%
@@ -655,7 +665,7 @@
 
 %    \end{macrocode}
 %
-% The ThesisPublications environment environment was modified in 2012
+% The ThesisPublications environment was modified in 2012
 % to include the suggestion by Ben Payne.  For his thesis, which used
 % the Publication Thesis option, the OGS requested that the word
 % SECTION appear in the toc prior to any chapters which followed the
@@ -685,7 +695,9 @@
     {SECTION\ \hfill}}}}
 
 \newenvironment{ThesisOnlyChapters}%
-  {\setboolean{firstThesisOnlyChapter}{true}}{}
+  {\ThesisListofEntry{lof}{SECTION}%
+   \ThesisListofEntry{lot}{SECTION}%
+   \setboolean{firstThesisOnlyChapter}{true}}{}
 
 \newcommand{\ThesisListofEntry}[2]{%
 \addtocontents{#1}{\protect\vspace{2ex}}
@@ -719,7 +731,7 @@
 %    \begin{macrocode}
 \newcommand{\PaperManuscript}[2]{%
   \ifthenelse{\equal{#1}{I}}
-    {\chapter*{PAPER \\ \ \\ \ \\ \ \\#1. #2}}
+    {\chapter*{PAPER \\ \ \\ \ \\ \ \\ \ \\#1. #2}}
     {\chapter*{#1. #2}}%
   \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#2}%
   \ThesisListofEntry{lof}{PAPER #1}%
@@ -740,7 +752,8 @@
 \newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 \newenvironment{ThesisPaperAbstract}%
    {\vspace*{0.25in}\noindent\textbf{ABSTRACT}\\ 
-    \addcontentsline{toc}{section}{ABSTRACT}}%
+    \addcontentsline{toc}{section}{ABSTRACT}
+    \indent}%
    {}
 
 %    \end{macrocode}
@@ -866,38 +879,56 @@
 % out. 
 %
 % koh, 2014/04/22: changed APPENDICES to normal font.
+%
+% koh, 2018/08/06: for the multiple chapter appendix, the appendix
+% chapter designation (A, B, etc.) is to be included with the section
+% numbering, however, that is not the case with the single chapter
+% appendix. This was difficult to solve as ``thesection'' counter was
+% inheriting the chapter number.  For reasons I do not understand, one
+% could not just access the section number by use of arabic{section}.
+% Finally was able to determine that a redefinition of \thesection to
+% include only the section number did the trick.  RESOLVED.
+
 
 %    \begin{macrocode}
+
 \newenvironment{ThesisAppendix}[1]{%
   \newpage%
   \ifthenelse{\equal{#1}{one}}%
-    {\addcontentsline{toc}{chapter}{\MakeUppercase{Appendix}}%
+ % ... single chapter appendix ...
+    {\setcounter{secnumdepth}{3}%
+     \addcontentsline{toc}{chapter}{\MakeUppercase{Appendix}}%
      \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}%
      \titleformat{\chapter}{\center\normalsize\bfseries\uppercase}%
         {}{.5em}{APPENDIX  \\ \vspace*{0.125in}\ \\ \center}%
      \titlespacing{\chapter}{0pt}{-0.59375in}{0.6875in}%
-     \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
-     \titleformat{\subsection}[runin]%
-        {\normalsize\bfseries}{\arabic{subsection}.}{0.5em}%
+     \renewcommand{\thesection}{\arabic{section}}%
+     \titleformat{\section}{\normalsize\bfseries\uppercase}%
+        {\thesection.}{.5em}{}%
+     \titleformat{\subsection}[runin]{\normalsize\bfseries}%
+        {\thesection.\arabic{subsection}.}{0.5em}%
         {}[.\hspace{0.5em}~]%
      \titleformat{\subsubsection}[runin]%
        {\normalsize\bfseries}%
-       {\arabic{subsection}.\arabic{subsubsection}.}%
+       {\thesection.\arabic{subsection}.\arabic{subsubsection}.}%
        {0.5em}{}[.\hspace{0.5em}~]}%
+ % ... multiple chapter appendix ...
     {\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}%
      \titleformat{\chapter}%[block]%
        {\vspace*{\stretch{1}}\center\normalsize\bfseries\uppercase}%
-       {APPENDIX \thechapter}{0em}%
+       {APPENDIX \thechapter.}{0em}%
        {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
  %      {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
      %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
-     \titleformat{\section}{\normalsize\bfseries\uppercase}{}{.5em}{}%
+     \setcounter{secnumdepth}{3}%
+     \titleformat{\section}{\normalsize\bfseries\uppercase}%
+       {\thesection.}{.5em}{}%
      \titleformat{\subsection}[runin]%
-       {\normalsize\bfseries}{\arabic{subsection}.}{0.5em}%
+       {\normalsize\bfseries}{\thesubsection.}{0.5em}%
        {}[.\hspace{0.5em}~]%
      \titleformat{\subsubsection}[runin]%
        {\normalsize\bfseries}%
-       {\arabic{subsection}.\arabic{subsubsection}.}{0.5em}%
+       {\thesubsubsection.}{0.5em}%
        {}[.\hspace{0.5em}~]%
      \Thesistocentry{APPENDICES}
      \appendix}%
@@ -988,7 +1019,7 @@
 % ... dot separation for leaders ...
 \renewcommand\@dotsep{4.5}
 
-%</mstthesis>
+%</mstogs>
 %    \end{macrocode}
 %
 % \section{UIUC Thesis Style File}
