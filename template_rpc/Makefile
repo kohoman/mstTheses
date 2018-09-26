@@ -15,9 +15,10 @@ foo  = template
 
 # ... bib files - only those accessed ...
 
-biblist = strings.bib lit.bib add.bib
-bibhome = $(HOME)/texmf/bibtex/bib
-bibs  := $(addprefix $(bibhome)/,$(biblist))
+biblist = add.bib
+bibs = $(biblist)
+#bibhome = $(HOME)/texmf/bibtex/bib
+#bibs  := $(addprefix $(bibhome)/,$(biblist))
 
 # ... rules ...
 
@@ -56,11 +57,11 @@ clean :
 	-rm -f nobib nonlo min
 
 help : 
-	@echo "make       -> generate ps from tex"
-	@echo "make nobib -> generate ps from tex (no bib)"
-	@echo "make nonlo -> generate ps from tex (no glo)"
-	@echo "make min   -> generate ps from tex (no bib or glo)"
-	@echo "make clean -> remove all auxiliary files"
+	@echo "make       -> generate rpcths pdf from tex"
+	@echo "make nobib -> generate pdf from tex (no bib, nlo)"
+	@echo "make nonlo -> generate pdf from tex (bib, no nlo)"
+	@echo "make min   -> generate pdf from tex (no bib or nlo)"
+	@echo "make clean -> remove all generated files"
 
 # ****** ****** ****** ****** ****** ****** ****** ****** ******
 

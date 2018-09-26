@@ -9,11 +9,17 @@
 \usepackage{psfrag}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
+ % ... nomenclature groupings ...
 \renewcommand{\nomgroup}[1]{
    \ifthenelse{\equal{#1}{A}}{\medskip \item \textbf{Roman}}{}%
    \ifthenelse{\equal{#1}{G}}{\medskip \item \textbf{Greek}}{}%
    \ifthenelse{\equal{#1}{S}}{\medskip \item \textbf{Subscripts}}{}%
 }
+ % ... nomenclature preamble ...
+\renewcommand{\nompreamble}{%
+\hspace*{-0.75in}\makebox[1.0in][l]{Symbol} Description}
+\renewcommand{\nomlabelwidth}{0.75in}
+
 \usepackage[nopar]{lipsum} % ... provides dummy text ...
 
  % ... end preamble ...
