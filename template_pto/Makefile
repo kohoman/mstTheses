@@ -47,8 +47,8 @@ nonlo : $(foo).tex $(bibs)
 	sed "s/bib]{chap/bib,draft]{chap/"  o$(foo).tex > $(foo).tex
 	pdflatex $(foo).tex
 	-bibtex $(foo)
-	bibtex pprbib
-	bibtex pprall
+	bibtex pprtwo
+	bibtex pprthree
 	mv o$(foo).tex $(foo).tex
 	pdflatex $(foo).tex
 	pdflatex $(foo).tex

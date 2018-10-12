@@ -28,7 +28,7 @@
 
  % ... specify: ms or phd ...
 
-\begin{ThesisTitlePage}{ms}
+\begin{ThesisTitlePage}{phd}
 
  % ... title page info ...
 
@@ -42,7 +42,11 @@
 
 \ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
 
-\ThesisCommittee{Daniel Bernoulli\\ Pierre-Simon Laplace\\ Joseph Fourier}
+\ThesisCommittee{%
+Daniel Bernoulli\\ %
+Leonard Euler\\ %
+Pierre-Simon Laplace\\ %
+Joseph Fourier}
 
  % ... Graduation date - NOT your submission date ...
 \graddate{1685}
@@ -74,23 +78,23 @@
 \begin{ThesisBody}
 
  % ... introduction chapter ...
-\ThesisBodyChapter{Introduction}\input{chapmin}
+\ThesisBodyChapter{Introduction}\input{chpone}
  % ... chapter ...
-\ThesisBodyChapter{Literature Review}\input{chapbib}
+\ThesisBodyChapter{Literature Review}\input{chptwo}
  % ... chapter ...
 \ThesisBodyChapter{First Contribution With a Long and Complicated Title But
-  No Floats, Citations or Nomenclature}\input{chapmin}
+  No Citations or Nomenclature}\input{chpthree}
  % ... chapter ...
-\ThesisBodyChapter{Second Contribution}\input{chapall}
+\ThesisBodyChapter{Second Contribution}\input{chpfour}
  % ... conclusions chapter ...
-\ThesisBodyChapter{Conclusions}\input{chapmin}
+\ThesisBodyChapter{Conclusions}\input{chpfive}
 
 \end{ThesisBody}
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{An Appendix Title}\input{chapmin}
-\ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
+\ThesisAppendixChapter{An Appendix Title}\input{apxone}
+\ThesisAppendixChapter{The Second Appendix Title}\input{apxtwo}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...

@@ -1,8 +1,11 @@
 \input docstrip
 \askforoverwritefalse
 
+% ... root tex files ...
 \generate{\file{rpctemplate.tex}{\from{ths.dtx}{rpc}}}
 \generate{\file{ptotemplate.tex}{\from{ths.dtx}{pto}}}
+
+% ... original input/include files ...
 \generate{\file{chapmin.tex}{\from{ths.dtx}{chapmin}}}
 \generate{\file{chapflt.tex}{\from{ths.dtx}{chapmin,addfig,addtbl}}}
 \generate{\file{chapbib.tex}{\from{ths.dtx}{chapmin,addbib}}}
@@ -12,11 +15,19 @@
 \generate{\file{pprmin.tex}{\from{ths.dtx}{pprmin}}}
 \generate{\file{pprbib.tex}{\from{ths.dtx}{pprbib}}}
 \generate{\file{pprall.tex}{\from{ths.dtx}{pprall}}}
-%\generate{\file{chapflt.tex}{\from{ths.dtx}{chapmin,addfig,addtbl}}}
-%\generate{\file{chapbib.tex}{\from{ths.dtx}{chapmin,addbib}}}
-%\generate{\file{chapglo.tex}{\from{ths.dtx}{chapmin,addglo}}}
-%\generate{\file{chapall.tex}{\from{ths.dtx}{chapmin,%
-%  addfig,addtbl,addbib,addglo}}}
+
+% ... new input/include files (to be sed modified) ... 
+\generate{\file{chpone.tex}{\from{ths.dtx}{chapmin}}}
+\generate{\file{chptwo.tex}{\from{ths.dtx}{chapmin,addbib}}}
+\generate{\file{chpthree.tex}{\from{ths.dtx}{chapmin,addfig,addtbl}}}
+\generate{\file{chpfour.tex}{\from{ths.dtx}{chapmin,%
+  addfig,addtbl,addbib,addglo}}}
+\generate{\file{chpfive.tex}{\from{ths.dtx}{chapmin}}}
+\generate{\file{pprone.tex}{\from{ths.dtx}{pprmin}}}
+\generate{\file{pprtwo.tex}{\from{ths.dtx}{pprbib}}}
+\generate{\file{pprthree.tex}{\from{ths.dtx}{pprall}}}
+\generate{\file{apxone.tex}{\from{ths.dtx}{chapmin}}}
+\generate{\file{apxtwo.tex}{\from{ths.dtx}{chapmin,addbib}}}
 
 \endbatchfile
 

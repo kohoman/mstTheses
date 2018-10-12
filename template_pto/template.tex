@@ -30,7 +30,7 @@
 
  % ... specify: ms | phd ...
 
-\begin{ThesisTitlePage}{ms}
+\begin{ThesisTitlePage}{phd}
 
 \author{\MakeUppercase{Full Legal Name}}
 
@@ -42,7 +42,11 @@
 
 \ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
 
-\ThesisCommittee{Daniel Bernoulli\\ Pierre-Simon Laplace\\ Joseph Fourier}
+\ThesisCommittee{%
+Daniel Bernoulli\\ %
+Leonard Euler\\ %
+Pierre-Simon Laplace\\ %
+Joseph Fourier}
 
  % ... Graduation date.  NOT your submission date! ...
 \graddate{1685}
@@ -56,7 +60,7 @@
 
  % ... front matter - publication option - ms|phd...
 
-\begin{ThesisPublicationOption}{ms}
+\begin{ThesisPublicationOption}{phd}
   This \ThesisDissertationType\ consists of the following three
   articles which have been submitted for publication, or will be
   submitted for publication as follows:
@@ -92,24 +96,24 @@
 \begin{ThesisBody}
 
 \begin{ThesisOnlyChapters}
-\ThesisBodyChapter{Introduction}\input{chapmin}
-\ThesisBodyChapter{Literature Review}\input{chapflt}
+\ThesisBodyChapter{Introduction}\input{chpone}
+\ThesisBodyChapter{Literature Review}\input{chptwo}
 \end{ThesisOnlyChapters}
 
  % ... thesis publications ...
 
 \begin{ThesisPublications}
 \PaperManuscript{I}{FIRST PAPER WITH NO REFERENCES BUT REALLY LONG %
-TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
-\PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprbib}
-\PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprall}
+TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprone}
+\PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprtwo}
+\PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprthree}
 \end{ThesisPublications}
 
  % ... conclusions chapter ...
 
 \begin{ThesisOnlyChapters}
-\ThesisBodyChapter{Unpublished Content}\input{chapflt}
-\ThesisBodyChapter{Summary and Conclusions}\input{chapmin}
+\ThesisBodyChapter{Unpublished Content}\input{chpthree}
+\ThesisBodyChapter{Summary and Conclusions}\input{chpfive}
 \end{ThesisOnlyChapters}
 
 \end{ThesisBody}
@@ -117,8 +121,8 @@ TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprmin}
  % ... appendix - specify number of appendix chapters ...
 
 \begin{ThesisAppendix}{two}
-\ThesisAppendixChapter{An Appendix Title}\input{chapmin}
-\ThesisAppendixChapter{The Second Appendix Title}\input{chapbib}
+\ThesisAppendixChapter{An Appendix Title}\input{apxone}
+\ThesisAppendixChapter{The Second Appendix Title}\input{apxtwo}
 \end{ThesisAppendix}
 
  % ... references - comma separated list of bib files ...
