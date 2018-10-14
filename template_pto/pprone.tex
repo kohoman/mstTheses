@@ -1,0 +1,162 @@
+%%
+%% This is file `pprone.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ths.dtx  (with options: `pprmin')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from pprone.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file ths.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+
+ % ... preamble ...
+\documentclass{article}
+\usepackage[nopar]{lipsum}
+\usepackage{graphicx}
+\usepackage{threeparttable}
+
+\newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
+\newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
+\newcommand{\ThesisPaperKeywords}[1]{\textbf{Keywords:} #1}
+
+\begin{document}
+
+ % ... title page ...
+
+\ThesisPaperAuthor{%
+ I.\ M.\ Author\\%
+ Department of Mechanical \& Aerospace Engineering\\
+ Missouri University of Science and Technology\\
+ Rolla, Missouri 65409--0050\\
+ Tel: 573--341--6622, Fax: 573--341--4115\\
+ Email: imauthor@mst.edu%
+}
+
+ % ... abstract ...
+
+\begin{ThesisPaperAbstract}
+\lipsum[50-52]
+\end{ThesisPaperAbstract}
+
+ % ... keywords ...
+
+\ThesisPaperKeywords{convection}
+
+ % ... nomenclature - do not edit ...
+
+
+ % ... introduction ...
+
+\section{INTRODUCTION}
+
+\lipsum[52-55]
+
+\section{A First-Level Heading in a Paper Which is Really
+Long So That It Produces a Two-Line Toc Entry}
+\lipsum[7-9]
+
+\subsection{A SECOND-LEVEL HEADING IN A PAPER}
+\lipsum[10]
+\subsubsection{A Third-Level Heading in a Paper with a Very Long and
+  Complicated Title to Once Again Verify the Formatting}
+\lipsum[10-12]
+\subsubsection{Another Third-Level Heading in a Paper}
+\lipsum[10-12]
+\paragraph{A fourth-level heading in a paper with a very long and complicated
+  title to verify the formatting}
+\lipsum[20]
+\paragraph{Another fourth-level heading}
+\lipsum[21]
+
+\subsection{ANOTHER SECOND-LEVEL HEADING IN A PAPER WITH
+A VERY LONG AND COMPLICATED TITLE TO VERIFY THE FORMATTING}
+\lipsum[13-15]
+
+ % ... formulation ...
+
+\section{Problem Formulation}%
+  \label{sec:formulation}
+\lipsum[56]
+
+\subsection{GOVERNING EQUATIONS}
+
+This is my simple equation
+\begin{equation}
+\delta_i = \sqrt{\nu t}
+\end{equation}
+where $\delta$ is the boundary layer thickness for Stokes' first
+problem. %
+\lipsum[57-60]
+
+Figure~\ref{fig:fig01} %
+\begin{figure}[t]
+  \begin{center}
+  \includegraphics[width=3.75in]{simple.pdf}
+  \end{center}
+  \caption{The caption of the figure.}
+\label{fig:fig01}
+\end{figure}
+illustrates the implementation of a very simple
+figure. \lipsum[61-65].
+
+Tables, such as Table~\ref{tbl:tbl01}, %
+\begin{table}[t]
+  \caption{The caption of the table should use capitalization
+    consistent with that of the figures.}
+  \label{tbl:tbl01}
+  \begin{center}
+  \begin{tabular}{c l l}
+  \hline
+  Example & Time & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+should appear in the order of their citation and should
+generally appear at the top of the page in a final manuscript.
+\lipsum[66-70]
+
+ % ... results ...
+
+\section{Results and Discussion} \label{sec:results}
+\lipsum[71-80]
+
+ % ... conclusions ...
+
+\section{Conclusions}
+\lipsum[81-85]
+
+ % ... acknowledgments ...
+
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+\lipsum[2]
+
+ % ... references - bib files ...
+
+ %\bibliographystyle{plainnat}
+ %\ThesisPaperReferences{add}
+
+ % ... end ...
+
+\end{document}
+
+
+\endinput
+%%
+%% End of file `pprone.tex'.
