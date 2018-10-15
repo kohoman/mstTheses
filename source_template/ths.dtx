@@ -268,7 +268,7 @@ Joseph Fourier}
 %    \begin{macrocode}
  % ... appendix - specify number of appendix chapters ...
 
-\begin{ThesisAppendix}{two}
+\begin{ThesisAppendix}{two}{false}{false}
 \ThesisAppendixChapter{An Appendix Title}\input{apxone}
 \ThesisAppendixChapter{The Second Appendix Title}\input{apxtwo}
 \end{ThesisAppendix}
@@ -507,7 +507,7 @@ Joseph Fourier}
 
 \begin{ThesisBody}
 
-\begin{ThesisOnlyChapters}
+\begin{ThesisOnlyChapters}{false}{false}
 \ThesisBodyChapter{Introduction}\input{chpone}
 \ThesisBodyChapter{Literature Review}\input{chptwo}
 \end{ThesisOnlyChapters}
@@ -523,7 +523,7 @@ TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprone}
 
  % ... conclusions chapter ...
 
-\begin{ThesisOnlyChapters}
+\begin{ThesisOnlyChapters}{true}{true}
 \ThesisBodyChapter{Unpublished Content}\input{chpthree}
 \ThesisBodyChapter{Summary and Conclusions}\input{chpfive}
 \end{ThesisOnlyChapters}
@@ -537,7 +537,7 @@ TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprone}
 %    \begin{macrocode}
  % ... appendix - specify number of appendix chapters ...
 
-\begin{ThesisAppendix}{two}
+\begin{ThesisAppendix}{two}{false}{false}
 \ThesisAppendixChapter{An Appendix Title}\input{apxone}
 \ThesisAppendixChapter{The Second Appendix Title}\input{apxtwo}
 \end{ThesisAppendix}
@@ -598,166 +598,6 @@ to once again verify the formatting}
 \lipsum[10-12]
 
 %</chapmin>
-%    \end{macrocode}
-%
-% \subsection{Content with Figures}
-%
-%    \begin{macrocode}
-%<*addfig>
-\section{Content with Figures}
-\lipsum[10]
-
-\subsection{Floats with Figures}
-
-\lipsum[12-13]
-
-\subsubsection{Simple figure with label}
-
-\lipsum[11]
-
-Add a simple figure, Figure~\ref{fig:fig00}, to illustrate
-an entry in the list of figures. %
-\begin{figure}[tb]
-  \begin{center}
-   \includegraphics[width=3.75in]{simple.eps}
-  \end{center}
-  \caption{The caption of the figure.}
-\label{fig:fig00}
-\end{figure}%
-\lipsum[12]
-
-\subsubsection{Figure with psfrag replacement}
-
-\lipsum[13].  Figure~\ref{fig:fig01} illustrates the use
-of the psfrag package to place \LaTeX\ math in a graphic.%
-\begin{figure}[tb]
-  \psfrag{x}{$x$}
-  \psfrag{y}{$y$}
-  \begin{center}
-   \includegraphics[width=3.75in]{simple.eps}
-  \end{center}
-  \caption[A figure caption which is extra long.]{A figure caption
-    which is extra long. This long caption not only demonstratees that
-    the required spacing in the list of figures is correct, but also
-    the general practice of making the list of figures (or tables)
-    entry the first sentence of the caption.}
-\label{fig:fig01}
-\end{figure}
-\lipsum[14]. The filler content is followed by a second figure,
-Figure~\ref{fig:fig02}.  %
-\begin{figure}[tb]
-  \psfrag{x}{$\hat{x}/L$}
-  \psfrag{y}{$y$}
-  \begin{center}
-   \includegraphics[width=3.75in]{simple.eps}
-  \end{center}
-  \caption{The figure caption made extra long so that the
-    required spacing in the list of figures is evident.}
-\label{fig:fig02}
-\end{figure}
-\lipsum[15]
-
-\subsection{A Bit More Discussion}
-\lipsum[16-19]
-
-%</addfig>
-%    \end{macrocode}
-%
-% \subsection{Content with Tables}
-%
-%    \begin{macrocode}
-%<*addtbl>
-\section{Content with Sample Tables}
-
-\lipsum[15]
-
-\subsection{Floats with Tables}
-
-\lipsum[16]
-
-\subsubsection{Simple table}
-
-Finally the tables, Table~\ref{tbl:tbl01} illustrates the syntax of a
-basic table. %
-\begin{table}[tb]
-  \caption{The capitalization of the table should match that of figures.}
-  \label{tbl:tbl01}
-  \begin{center}
-  \begin{tabular}{c l l}
-  \hline
-  Example & Time & Cost \\
-  \hline
-  1 & 12.5 & \$1,000 \\
-  2 & 24 & \$2,000 \\
-  \hline
-  \end{tabular}
-  \end{center}
-\end{table}
-\lipsum[16-18]
-
-\subsubsection{Three-part table example}
-
-Table~\ref{tbl:tbl02}, which illustrates the syntax of a three-part
-table which includes table notes in addition to a caption and table
-body.
-\begin{table}[tb]
-\begin{threeparttable}
-  \caption{The caption of the three-part table.}
-  \label{tbl:tbl02}
-  \begin{center}
-\begin{tabular*}{\textwidth}{c l l} % or {tabular}
-  \hline
-  Example & Time\tnote{1} & Cost \\
-  \hline
-  1 & 12.5 & \$1,000 \\
-  2 & 24 & \$2,000 \\
-  \hline
-\end{tabular*}
-\begin{tablenotes}
-  \item [1] The first note.
-\end{tablenotes}
-  \end{center}
-\end{threeparttable}
-\end{table}
-\lipsum[19-21]
-
-\subsection{One More Thing}
-\lipsum[22-25]
-%</addtbl>
-%    \end{macrocode}
-%
-% \subsection{Content with \texttt{natbib} Citations}
-%
-%    \begin{macrocode}
-%<*addbib>
-
-\section{Content with \texttt{natbib} Citations}
-
-This had been discussed previously by \citep{bullwinkle.1990} and
-\citet{winkle.1991}. \lipsum[22-25]
-
-%</addbib>
-%    \end{macrocode}
-%
-% \subsection{Content with \texttt{nomencl} Entries} 
-%
-%    \begin{macrocode}
-%<*addglo>
-
-\section{Content with \texttt{nomencl} Entries} 
-
-Finally, we add a simple equation to illustrate the use of the nomencl
- package for automatic generation of a list of symbols.
-\begin{equation}
-\delta_i = \sqrt{t/\mathrm{Pe}}
-\end{equation}
-where $\delta$ is the layer
-thickness %
-\nomenclature[at]{$t$}{time}%
-\nomenclature[gd]{$\delta$}{layer thickness}%
-\nomenclature[si]{$i$}{inlet}%
-as defined previously. \lipsum[26-30]
-%</addglo>
 %    \end{macrocode}
 %
 %
@@ -1207,6 +1047,200 @@ generally appear at the top of the page in a final manuscript.
 
 %</pprall>
 %    \end{macrocode}
+%
+% \subsection{Minimal (text-only) Appendix  Template}
+%
+%    \begin{macrocode}
+%<*apxmin>
+
+ %% ... sample chapter ...
+
+\section{A First-LEVEL Appendix HEADING}
+\lipsum[7-9]
+
+\subsection{A Second-Level Appendix Heading}
+\lipsum[10]
+\subsubsection{A Third-Level Appendix Heading with a Very Long and
+  Complicated Title to Once Again Verify the Formatting}
+\lipsum[10-12]
+\subsubsection{Another Third-Level Appendix Heading}
+\lipsum[10-12]
+\paragraph{A fourth-level appendix heading with a long and complicated title
+to once again verify the formatting}
+\lipsum[13-15]
+
+\subsection{Another Second-Level Appendix Heading but with a 
+Very Long and Complicated Title to Verify the Formatting}
+\lipsum[13-15]
+
+\section{Discussion Using a First-Level Appendix Heading 
+  Which is Really Long So That It Produces a Two-Line 
+  Toc Entry}
+\lipsum[10-12]
+
+%</apxmin>
+%    \end{macrocode}
+%
+% \subsection{Content with Figures}
+%
+%    \begin{macrocode}
+%<*addfig>
+\section{Content with Figures}
+\lipsum[10]
+
+\subsection{Floats with Figures}
+
+\lipsum[12-13]
+
+\subsubsection{Simple figure with label}
+
+\lipsum[11]
+
+Add a simple figure, Figure~\ref{fig:fig00}, to illustrate
+an entry in the list of figures. %
+\begin{figure}[tb]
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption{The caption of the figure.}
+\label{fig:fig00}
+\end{figure}%
+\lipsum[12]
+
+\subsubsection{Figure with psfrag replacement}
+
+\lipsum[13].  Figure~\ref{fig:fig01} illustrates the use
+of the psfrag package to place \LaTeX\ math in a graphic.%
+\begin{figure}[tb]
+  \psfrag{x}{$x$}
+  \psfrag{y}{$y$}
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption[A figure caption which is extra long.]{A figure caption
+    which is extra long. This long caption not only demonstratees that
+    the required spacing in the list of figures is correct, but also
+    the general practice of making the list of figures (or tables)
+    entry the first sentence of the caption.}
+\label{fig:fig01}
+\end{figure}
+\lipsum[14]. The filler content is followed by a second figure,
+Figure~\ref{fig:fig02}.  %
+\begin{figure}[tb]
+  \psfrag{x}{$\hat{x}/L$}
+  \psfrag{y}{$y$}
+  \begin{center}
+   \includegraphics[width=3.75in]{simple.eps}
+  \end{center}
+  \caption{The figure caption made extra long so that the
+    required spacing in the list of figures is evident.}
+\label{fig:fig02}
+\end{figure}
+\lipsum[15]
+
+\subsection{A Bit More Discussion}
+\lipsum[16-19]
+
+%</addfig>
+%    \end{macrocode}
+%
+% \subsection{Content with Tables}
+%
+%    \begin{macrocode}
+%<*addtbl>
+\section{Content with Sample Tables}
+
+\lipsum[15]
+
+\subsection{Floats with Tables}
+
+\lipsum[16]
+
+\subsubsection{Simple table}
+
+Finally the tables, Table~\ref{tbl:tbl01} illustrates the syntax of a
+basic table. %
+\begin{table}[tb]
+  \caption{The capitalization of the table should match that of figures.}
+  \label{tbl:tbl01}
+  \begin{center}
+  \begin{tabular}{c l l}
+  \hline
+  Example & Time & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+\lipsum[16-18]
+
+\subsubsection{Three-part table example}
+
+Table~\ref{tbl:tbl02}, which illustrates the syntax of a three-part
+table which includes table notes in addition to a caption and table
+body.
+\begin{table}[tb]
+\begin{threeparttable}
+  \caption{The caption of the three-part table.}
+  \label{tbl:tbl02}
+  \begin{center}
+\begin{tabular*}{\textwidth}{c l l} % or {tabular}
+  \hline
+  Example & Time\tnote{1} & Cost \\
+  \hline
+  1 & 12.5 & \$1,000 \\
+  2 & 24 & \$2,000 \\
+  \hline
+\end{tabular*}
+\begin{tablenotes}
+  \item [1] The first note.
+\end{tablenotes}
+  \end{center}
+\end{threeparttable}
+\end{table}
+\lipsum[19-21]
+
+\subsection{One More Thing}
+\lipsum[22-25]
+%</addtbl>
+%    \end{macrocode}
+%
+% \subsection{Content with \texttt{natbib} Citations}
+%
+%    \begin{macrocode}
+%<*addbib>
+
+\section{Content with \texttt{natbib} Citations}
+
+This had been discussed previously by \citep{bullwinkle.1990} and
+\citet{winkle.1991}. \lipsum[22-25]
+
+%</addbib>
+%    \end{macrocode}
+%
+% \subsection{Content with \texttt{nomencl} Entries} 
+%
+%    \begin{macrocode}
+%<*addglo>
+
+\section{Content with \texttt{nomencl} Entries} 
+
+Finally, we add a simple equation to illustrate the use of the nomencl
+ package for automatic generation of a list of symbols.
+\begin{equation}
+\delta_i = \sqrt{t/\mathrm{Pe}}
+\end{equation}
+where $\delta$ is the layer
+thickness %
+\nomenclature[at]{$t$}{time}%
+\nomenclature[gd]{$\delta$}{layer thickness}%
+\nomenclature[si]{$i$}{inlet}%
+as defined previously. \lipsum[26-30]
+%</addglo>
+%    \end{macrocode}
+%
 %
 
 \endinput       

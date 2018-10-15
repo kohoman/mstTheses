@@ -29,6 +29,8 @@
 \newboolean{double}
 \newboolean{onehalf}
 \newboolean{firstThesisOnlyChapter}
+\newboolean{lofHeading}
+\newboolean{lotHeading}
 \DeclareOption{10pt}{%
 \PassOptionsToClass{10pt}{report}%
 }
@@ -128,7 +130,7 @@
 \setlength{\parindent}{0.5in}
 
 \setcounter{tocdepth}{3}
-\addtocounter{secnumdepth}{1}
+\addtocounter{secnumdepth}{2}
 
 \newcommand{\ThesisAdvisor}[1]{\advisor{#1}}
 \newcommand{\ThesisCommittee}[1]{\committee{#1}}
@@ -383,14 +385,39 @@
   \renewcommand{\thefigure}{\arabic{figure}}
   \renewcommand{\thetable}{\arabic{table}}
   \renewcommand{\theequation}{\arabic{equation}}
+\titleformat{\section}{\singlespacing\center\normalsize\bfseries\uppercase}%
+  {\thesection.}{.5em}{}[\doublespacing]
+\titleformat{\subsection}{\singlespacing\normalsize\bfseries}%
+  {\thesubsection.}{0.5em}{}[\doublespacing]
+\titlespacing{\subsection}{0pt}{\parskip}{0pt}
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+  {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries}%
+  {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
   }%
   {\newpage\addtocontents{toc}{\protect\vspace{4ex}}%
   \addtocontents{toc}{\hbox to \textwidth{{}\hspace*{-2mm}%
-    {SECTION\ \hfill}}}}
+    {SECTION\ \hfill}}}
+\titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
+  {\thesection.}{.5em}{}[\doublespacing]
+\titleformat{\subsection}[runin]{\normalsize\bfseries}%
+  {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsection}{\parindent}{\parskip}{0pt}
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+  {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+\titleformat{\paragraph}[runin]{\normalsize\itshape}%
+  {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
+}
 
-\newenvironment{ThesisOnlyChapters}%
-  {\ThesisListofEntry{lof}{SECTION}%
-   \ThesisListofEntry{lot}{SECTION}%
+\newenvironment{ThesisOnlyChapters}[2]{%
+   \setboolean{lofHeading}{#1}%
+   \setboolean{lotHeading}{#2}%
+   \ifthenelse{\boolean{lofHeading}}{\ThesisListofEntry{lof}{SECTION}}{}%
+   \ifthenelse{\boolean{lotHeading}}{\ThesisListofEntry{lot}{SECTION}}{}%
    \setboolean{firstThesisOnlyChapter}{true}}{}
 
 \newcommand{\ThesisListofEntry}[2]{%
@@ -414,7 +441,7 @@
 \newcommand{\ThesisPaperKeywords}[1]{\noindent\textbf{Keywords:} #1}
 \newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 \newenvironment{ThesisPaperAbstract}%
-   {\vspace*{0.25in}\noindent\textbf{ABSTRACT}\\
+   {\vspace*{0.25in}\begin{center}\textbf{ABSTRACT}\end{center} %\\
     \addcontentsline{toc}{section}{ABSTRACT}
     \indent}%
    {}
@@ -478,8 +505,16 @@
 
 
 
-\newenvironment{ThesisAppendix}[1]{%
+\newenvironment{ThesisAppendix}[3]{%
   \newpage%
+  \captionsetup{list=no}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+  \setboolean{lofHeading}{#2}
+  \setboolean{lotHeading}{#3}
+  \ifthenelse{\boolean{lofHeading}}{\ThesisListofEntry{lof}{APPENDIX}}{}%
+  \ifthenelse{\boolean{lotHeading}}{\ThesisListofEntry{lot}{APPENDIX}}{}%
   \ifthenelse{\equal{#1}{one}}%
  % ... single chapter appendix ...
     {\setcounter{secnumdepth}{3}%
@@ -506,19 +541,26 @@
        {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
  %      {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
      %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
-     \setcounter{secnumdepth}{3}%
-     \titleformat{\section}{\normalsize\bfseries\uppercase}%
-       {\thesection.}{.5em}{}%
-     \titleformat{\subsection}[runin]%
-       {\normalsize\bfseries}{\thesubsection.}{0.5em}%
-       {}[.\hspace{0.5em}~]%
-     \titleformat{\subsubsection}[runin]%
-       {\normalsize\bfseries}%
-       {\thesubsubsection.}{0.5em}%
-       {}[.\hspace{0.5em}~]%
+     \setcounter{secnumdepth}{4}% ... 4 = number paragraph headings ...
+     \renewcommand{\thesection}{\arabic{section}}%
+     \titleformat{\section}%
+       {\singlespacing\center\normalsize\bfseries\uppercase}%
+       {\thesection.}{.5em}{}[\doublespacing]%
+     \titleformat{\subsection}%
+       {\singlespacing\normalsize\bfseries\uppercase}%
+       {\thesubsection.}{0.5em}{}[\doublespacing]%
+     \titlespacing{\subsection}{0pt}{\parskip}{0pt}
+     \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+       {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]%
+     \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+     \titleformat{\paragraph}[runin]{\normalsize\bfseries}%
+       {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+     \titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
      \Thesistocentry{APPENDICES}
      \appendix}%
-}{\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}}
+}%
+{\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}%
+}
 
 
 \newenvironment{ThesisBibliography}[1]{%

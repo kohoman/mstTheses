@@ -122,6 +122,8 @@
 \newboolean{double}
 \newboolean{onehalf}
 \newboolean{firstThesisOnlyChapter}
+\newboolean{lofHeading}
+\newboolean{lotHeading}
 %    \end{macrocode}
 %
 % \subsection{Declaration of Options}
@@ -319,10 +321,13 @@
 % The numbering depth and inclusion in toc. Up until 2017 oct 04, 
 % only through subsubsections were numbered.  Changed the
 % secnumdepth addtocounter to 2 so as to number paragraph headings.
+% 2018/10/14, koh: The secnumdepth counter has been changed back to 2
+% since the OGS format specs use paragraph as the fourth-level heading
+% in a publication.
 %
 %    \begin{macrocode}
 \setcounter{tocdepth}{3}
-\addtocounter{secnumdepth}{1}
+\addtocounter{secnumdepth}{2}
 
 %    \end{macrocode}
 %
@@ -649,7 +654,7 @@
 % force a 4-line separation between the bottom of a float and the
 % subsequent text (added fall 2011).
 %
-% The template I put together for the first time in Spring 2004 used
+% The template put together for the first time in Spring 2004 used
 % the setcounter command in the base tex file to specify the pagination
 % of the individual starting pages of the publications.  This appears
 % not to work.  Apparently, these must be edited after adding the
@@ -689,14 +694,41 @@
   \renewcommand{\thefigure}{\arabic{figure}}
   \renewcommand{\thetable}{\arabic{table}}
   \renewcommand{\theequation}{\arabic{equation}}
+% ... original content from thesis body 2018/10/14, koh ...
+\titleformat{\section}{\singlespacing\center\normalsize\bfseries\uppercase}%
+  {\thesection.}{.5em}{}[\doublespacing]
+\titleformat{\subsection}{\singlespacing\normalsize\bfseries}%
+  {\thesubsection.}{0.5em}{}[\doublespacing]
+\titlespacing{\subsection}{0pt}{\parskip}{0pt}
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+  {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries}%
+  {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
   }%
   {\newpage\addtocontents{toc}{\protect\vspace{4ex}}%
   \addtocontents{toc}{\hbox to \textwidth{{}\hspace*{-2mm}%
-    {SECTION\ \hfill}}}}
+    {SECTION\ \hfill}}}
+% ... reset sectioning to that of thesis body, 2018/10/14, koh ...
+\titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
+  {\thesection.}{.5em}{}[\doublespacing]
+\titleformat{\subsection}[runin]{\normalsize\bfseries}%
+  {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsection}{\parindent}{\parskip}{0pt}
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+  {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+\titleformat{\paragraph}[runin]{\normalsize\itshape}%
+  {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+\titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
+}
 
-\newenvironment{ThesisOnlyChapters}%
-  {\ThesisListofEntry{lof}{SECTION}%
-   \ThesisListofEntry{lot}{SECTION}%
+\newenvironment{ThesisOnlyChapters}[2]{%
+   \setboolean{lofHeading}{#1}%
+   \setboolean{lotHeading}{#2}%
+   \ifthenelse{\boolean{lofHeading}}{\ThesisListofEntry{lof}{SECTION}}{}%
+   \ifthenelse{\boolean{lotHeading}}{\ThesisListofEntry{lot}{SECTION}}{}%
    \setboolean{firstThesisOnlyChapter}{true}}{}
 
 \newcommand{\ThesisListofEntry}[2]{%
@@ -746,12 +778,14 @@
 % 2017/01/24, koh - added commands which allow for a generic 
 % manuscript chapter, with formatting essentially identical to the
 % rest of the thesis.
+% 2018/10/14, koh - added center command to make the abstract
+% formatting match that of a first-level (OGS) heading.
 %    \begin{macrocode}
 \newcommand{\ThesisPaperAuthor}[1]{\begin{center}#1\end{center}}
 \newcommand{\ThesisPaperKeywords}[1]{\noindent\textbf{Keywords:} #1}
 \newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 \newenvironment{ThesisPaperAbstract}%
-   {\vspace*{0.25in}\noindent\textbf{ABSTRACT}\\ 
+   {\vspace*{0.25in}\begin{center}\textbf{ABSTRACT}\end{center} %\\
     \addcontentsline{toc}{section}{ABSTRACT}
     \indent}%
    {}
@@ -767,6 +801,7 @@
 % as a separate command so that the user has the flexibility of
 % including this command either in the root tex file, such as in the
 % companion template, or in the input file for a chapter.
+%
 % \begin{verbatim}
 %     %\titleformat{\chapter}{\singlespacing\center\normalsize
 %    %  \bfseries\uppercase}{SECTION \thechapter.}{.5em}{}[\doublespacing]
@@ -888,12 +923,24 @@
 % could not just access the section number by use of arabic{section}.
 % Finally was able to determine that a redefinition of \thesection to
 % include only the section number did the trick.  RESOLVED.
+%
+% koh, 2018/10/14: for the multiple chapter appendix, OGS has made the
+% decision to drop the chapter designation (A, B, etc) to mirror the
+% approach used in the thesis publication chapters.
 
 
 %    \begin{macrocode}
 
-\newenvironment{ThesisAppendix}[1]{%
+\newenvironment{ThesisAppendix}[3]{%
   \newpage%
+  \captionsetup{list=no}
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+  \setboolean{lofHeading}{#2}
+  \setboolean{lotHeading}{#3}
+  \ifthenelse{\boolean{lofHeading}}{\ThesisListofEntry{lof}{APPENDIX}}{}%
+  \ifthenelse{\boolean{lotHeading}}{\ThesisListofEntry{lot}{APPENDIX}}{}%
   \ifthenelse{\equal{#1}{one}}%
  % ... single chapter appendix ...
     {\setcounter{secnumdepth}{3}%
@@ -920,19 +967,26 @@
        {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
  %      {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
      %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
-     \setcounter{secnumdepth}{3}%
-     \titleformat{\section}{\normalsize\bfseries\uppercase}%
-       {\thesection.}{.5em}{}%
-     \titleformat{\subsection}[runin]%
-       {\normalsize\bfseries}{\thesubsection.}{0.5em}%
-       {}[.\hspace{0.5em}~]%
-     \titleformat{\subsubsection}[runin]%
-       {\normalsize\bfseries}%
-       {\thesubsubsection.}{0.5em}%
-       {}[.\hspace{0.5em}~]%
+     \setcounter{secnumdepth}{4}% ... 4 = number paragraph headings ...
+     \renewcommand{\thesection}{\arabic{section}}%
+     \titleformat{\section}%
+       {\singlespacing\center\normalsize\bfseries\uppercase}%
+       {\thesection.}{.5em}{}[\doublespacing]%
+     \titleformat{\subsection}%
+       {\singlespacing\normalsize\bfseries\uppercase}%
+       {\thesubsection.}{0.5em}{}[\doublespacing]%
+     \titlespacing{\subsection}{0pt}{\parskip}{0pt}
+     \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
+       {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]%
+     \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
+     \titleformat{\paragraph}[runin]{\normalsize\bfseries}%
+       {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
+     \titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
      \Thesistocentry{APPENDICES}
      \appendix}%
-}{\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}}
+}%
+{\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}%
+}
 
 %    \end{macrocode}
 %
