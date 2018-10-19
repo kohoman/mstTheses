@@ -91,6 +91,7 @@
 \titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
+\titlespacing{\section}{0pt}{\parskip}{0pt}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsection}{\parindent}{\parskip}{0pt}
@@ -443,7 +444,7 @@
 \newenvironment{ThesisPaperAbstract}%
    {\vspace*{0.25in}\begin{center}\textbf{ABSTRACT}\end{center} %\\
     \addcontentsline{toc}{section}{ABSTRACT}
-    \indent}%
+    \hspace{\parindent}}%
    {}
 
 \newcommand{\ThesisBodyChapter}[1]{%
