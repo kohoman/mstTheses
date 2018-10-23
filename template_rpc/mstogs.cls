@@ -91,7 +91,7 @@
 \titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
-\titlespacing{\section}{0pt}{\parskip}{0pt}
+\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsection}{\parindent}{\parskip}{0pt}
@@ -390,7 +390,7 @@
   {\thesection.}{.5em}{}[\doublespacing]
 \titleformat{\subsection}{\singlespacing\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[\doublespacing]
-\titlespacing{\subsection}{0pt}{\parskip}{0pt}
+\titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
   {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
@@ -403,6 +403,7 @@
     {SECTION\ \hfill}}}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
+\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsection}{\parindent}{\parskip}{0pt}
@@ -530,6 +531,7 @@
      \titleformat{\subsection}[runin]{\normalsize\bfseries}%
         {\thesection.\arabic{subsection}.}{0.5em}%
         {}[.\hspace{0.5em}~]%
+     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
      \titleformat{\subsubsection}[runin]%
        {\normalsize\bfseries}%
        {\thesection.\arabic{subsection}.\arabic{subsubsection}.}%
@@ -550,7 +552,7 @@
      \titleformat{\subsection}%
        {\singlespacing\normalsize\bfseries\uppercase}%
        {\thesubsection.}{0.5em}{}[\doublespacing]%
-     \titlespacing{\subsection}{0pt}{\parskip}{0pt}
+     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
      \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
        {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]%
      \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
