@@ -1,4 +1,4 @@
-# mst_ths
+# mstTheses
 Missouri S&amp;T Thesis Class and Templates
 
 
