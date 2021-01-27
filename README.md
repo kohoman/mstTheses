@@ -2,6 +2,18 @@
 Missouri S&amp;T Thesis Class and Templates
 
 
+Bibliography style file replacements (2021/01/27)
+
+The repository now contains two distinct bst files: 
+ - mstogs-num.bst, and
+ - mstogs-auy.bst.
+Both bst files are for use with natbib, but differ as to whether the reference/bibliography listing is in numerical order of citation or alphabetized.  
+The second file, mstogs-auy.bst, produces an alphabetized list and is most appropriately used with the authoryear natbib package option.
+The first file, mstogs-num.bst, should be used with the numbers package option to produce a numbered reference list corresponding to order of citation.
+The two files match OGS-specified formatting of thesis/dissertation bibliographies and similar in function to unsrtnat.bst and plainnat.bst, which
+are two of the bibliography style files supplied with the natbib package.  The custom-bib source code, in the form of dbj files, are included with 
+the repository to allow for changes, as necessary.
+
 
 Notes for version 4.0 (2018/08/07)
 
