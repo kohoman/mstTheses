@@ -2,6 +2,8 @@
 Missouri S&amp;T Thesis Class and Templates
 
 
+----- ----- ----- -----
+
 Bibliography style file replacements (2021/01/27)
 
 The repository now contains two distinct bst files: 
@@ -15,6 +17,7 @@ The two files match OGS-specified formatting of thesis/dissertation bibliographi
 are two of the bibliography style files supplied with the natbib package.  The custom-bib source code, in the form of dbj files, are included with 
 the repository to allow for changes, as necessary.
 
+----- ----- ----- -----
 
 Notes for version 4.0 (2018/08/07)
 
