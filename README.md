@@ -7,6 +7,7 @@ Bibliography style file replacements (2021/01/27)
 The repository now contains two distinct bst files: 
  - mstogs-num.bst, and
  - mstogs-auy.bst.
+ 
 Both bst files are for use with natbib, but differ as to whether the reference/bibliography listing is in numerical order of citation or alphabetized.  
 The second file, mstogs-auy.bst, produces an alphabetized list and is most appropriately used with the authoryear natbib package option.
 The first file, mstogs-num.bst, should be used with the numbers package option to produce a numbered reference list corresponding to order of citation.
