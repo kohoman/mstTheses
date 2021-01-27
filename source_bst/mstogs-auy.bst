@@ -1,12 +1,12 @@
 %%
-%% This is file `mstogs.bst',
+%% This is file `mstogs-auy.bst',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `ay,nat,nm-rev,jnrlst,keyxyr,dt-jnl,note-yr,tit-qq,qt-s,bt-qq,jttl-rm,vol-bf,volp-com,jwdpg,num-xser,isbn,issn,doi,blk-com,pp,xedn,etal-it,nfss,')
+%% merlin.mbs  (with options: `ay,nat,nm-rev,jnrlst,keyxyr,dt-jnl,aymth,note-yr,tit-qq,qt-s,bt-qq,jttl-rm,vol-bf,volp-com,jwdpg,num-xser,isbn,issn,doi,blk-com,pp,xedn,etal-it,nfss,')
 %% ----------------------------------------
-%% *** Bibliography style file for the Missouri S&T Thesis/Dissertation template ***
+%% *** Missouri S&T Thesis Bibliography Style File (mstogs.bst) ***
 %% 
 %% Copyright 1994-2011 Patrick W Daly
  % ===============================================================
@@ -711,6 +711,13 @@ FUNCTION {format.date}
     }
     'skip$
   if$
+  month "month" bibinfo.check duplicate$ empty$
+    'skip$
+    {
+      " " * swap$
+    }
+  if$
+  *
   extra.label *
 }
 FUNCTION {format.btitle}
@@ -1563,4 +1570,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 %% End of customized bst file
 %%
-%% End of file `mstogs.bst'.
+%% End of file `mstogs-auy.bst'.
