@@ -2,7 +2,13 @@
  % ... preamble ...
 \documentclass[times,12pt,titlepage]{mstogs}
 \doublespacing
-\usepackage[authoryear,sort]{natbib} % ... numbers or authoryear ...
+ % ... bibliography/reference list citations - natbib package ...
+ % for numerical listings in order of citation: numbers option
+ %     and bibliographystyle = unsrtnat, or mstogs-num.
+ % for alphabetical listings in author-year format: authoryear option
+ %     and bibliographystyle = plainnat, or mstogs-auy.
+\usepackage[numbers,sort]{natbib} % see natbib package documentation
+
 \setlength{\bibhang}{0.5in}
 \usepackage{threeparttable}
 \usepackage[final]{graphicx}
@@ -97,13 +103,22 @@ Joseph Fourier}
 \ThesisAppendixChapter{The Second Appendix Title}\input{apxtwo}
 \end{ThesisAppendix}
 
- % ... references - comma separated list of bib files ...
+ %% ... references - comma separated list of bib files ...
+ %% Note - the template uses the natbib package, all of the
+ %%        following packages are natbib compatible
+ %% unsrtnat -> order of citation listings, use numbers option
+ %% mstogs-num -> use numbers option, OGS-specified formatting
+ %% plainnat -> alphabetical citation listings, use authoryear option
+ %% mstogs-auy -> use authoryear option, OGS-specified formatting
+ %% ieetr -> widely used formatting style
 
 \begin{ThesisBibliography}{REFERENCES}
- %\bibliographystyle{unsrtnat}
- %\bibliographystyle{ieeetr}
- %\bibliographystyle{plainnat}
-\bibliographystyle{mstogs}
+ \bibliographystyle{unsrtnat}
+ % \bibliographystyle{mstogs-num}
+ % \bibliographystyle{plainnat}
+ % \bibliographystyle{mstogs-auy}
+ % \bibliographystyle{ieeetr}
+
 \singlespacing
 \bibliography{add}
 \end{ThesisBibliography}

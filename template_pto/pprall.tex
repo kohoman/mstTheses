@@ -28,7 +28,7 @@
 \usepackage{graphicx}
 \usepackage{threeparttable}
 \usepackage{setspace}
-\usepackage{natbib}
+\usepackage[numbers]{natbib}
 \setlength{\bibhang}{0.5in}
 \usepackage[noprefix]{nomencl}
 \makenomenclature
@@ -90,8 +90,8 @@ thickness %
 \nomenclature[at]{$t$}{time}%
 \nomenclature[gd]{$\delta$}{thermocline thickness}%
 \nomenclature[si]{$i$}{inlet}%
-defined previously by \citep{bullwinkle.1990} and
-\citet{winkle.1991}. \lipsum[57-60]
+defined previously by \citep{winkle.1991} and
+\citet{bullwinkle.1990}. \lipsum[57-60]
 
 Figure~\ref{fig:fig01} %
 \begin{figure}[t]
@@ -163,7 +163,8 @@ generally appear at the top of the page in a final manuscript.
  % ... references - bib files ...
 
 \begin{ThesisPaperBibliography}{REFERENCES}
-\bibliographystyle{mstogs}
+  \bibliographystyle{unsrtnat}
+  %\bibliographystyle{mstogs-num}
 \singlespacing
 \ThesisPaperReferences{add}
 \end{ThesisPaperBibliography}
