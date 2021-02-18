@@ -318,7 +318,7 @@
       \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{\ \hfill Page}}
-  \singlespacing\setlength{\parskip}{10\p@}
+  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
@@ -341,7 +341,7 @@
             {\uppercase{\listfigurename}}}%
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{Figure \ \hfill Page}}
-  \singlespacing\setlength{\parskip}{10\p@}
+  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
   \@starttoc{lof}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
@@ -360,7 +360,7 @@
     \@mkboth{\uppercase{\listtablename}}{\uppercase{\listtablename}}}%
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{Table \ \hfill Page}}
-  \singlespacing\setlength{\parskip}{10\p@}
+  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
   \@starttoc{lot}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
