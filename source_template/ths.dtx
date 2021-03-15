@@ -202,7 +202,7 @@
 
  % ... thesis committee ...
 
-\ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
+\ThesisAdvisor{Ludwig Prandtl, Advisor\\ Joe Miner, Co-Advisor}
 
 \ThesisCommittee{%
 Daniel Bernoulli\\ %
@@ -454,7 +454,7 @@ Joseph Fourier}
 
  % ... thesis committee ...
 
-\ThesisAdvisor{Ludwig Prandtl, Co-Advisor\\ Joe Miner, Co-Advisor}
+\ThesisAdvisor{Ludwig Prandtl, Advisor\\ Joe Miner, Co-Advisor}
 
 \ThesisCommittee{%
 Daniel Bernoulli\\ %
@@ -481,15 +481,25 @@ Joseph Fourier}
 
 \begin{ThesisPublicationOption}{phd}
   This \ThesisDissertationType\ consists of the following three
-  articles which have been submitted for publication, or will be
-  submitted for publication as follows:
-\begin{quote}\begin{description}
-\item Paper I: Pages x-xx have been submitted to ABC Journal.
-\item Paper II: Pages x-xx are intended for submission to XYZ Journal.
-\item Paper III: Pages x-xx have been accepted by 123 Journal.
-\end{description}\end{quote}
+  articles, formatted in the style used by the Missouri University of
+  Science and Technology.
+   
+  Paper I: Pages x-xx have been submitted to ABC Journal. Lorem ipsum
+  dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+  vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur
+  dictum gravida mauris.
 
-\end{ThesisPublicationOption}
+  Paper II: Pages x-xx are intended for submission to XYZ
+  Journal. Lorem ipsum dolor sit amet, consectetuer adipiscing
+  elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae,
+  felis. Curabitur dictum gravida mauris.
+
+  Paper III: Pages x-xx have been accepted by 123 Journal. Lorem ipsum
+  dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+  vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur
+  dictum gravida mauris.
+  
+ \end{ThesisPublicationOption}
 
  % ... front matter - thesis abstract ...
 
@@ -525,6 +535,7 @@ Joseph Fourier}
 \begin{ThesisBody}
 
 \begin{ThesisOnlyChapters}{false}{false}
+\setboolean{firstThesisOnlyChapter}{false} % ... SECTION not printed ...    
 \ThesisBodyChapter{Introduction}\input{chpone}
 \ThesisBodyChapter{Literature Review}\input{chptwo}
 \end{ThesisOnlyChapters}
@@ -1117,7 +1128,7 @@ Very Long and Complicated Title to Verify the Formatting}
 
 \lipsum[12-13]
 
-\subsubsection{Simple figure with label}
+\subsubsection{Simple Figure with Label}
 
 \lipsum[11]
 

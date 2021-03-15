@@ -85,7 +85,7 @@
 \RequirePackage{indentfirst}[1995/11/23]
 \RequirePackage[noprefix]{nomencl}[2005/09/22]
 
-\RequirePackage{titlesec}[2007/08/12]
+\RequirePackage{titlesec}[2019/10/16]
 \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
   {\thechapter.}{.5em}{}[\doublespacing]
 \titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
@@ -102,7 +102,7 @@
   {\theparagraph.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\paragraph}{\parindent}{\parskip}{0pt}
 
-\RequirePackage[titles]{tocloft}
+\RequirePackage[titles]{tocloft}[2017/08/31]
 \RequirePackage{etoolbox}
 
 \RequirePackage{fancyhdr}
@@ -182,7 +182,7 @@
          ~in~\\[18pt]%
          \uppercase\expandafter{\@department} \\[18pt]
          \@graddate\\[18pt]
-         Approved by\\
+         Approved by:\\
      \vspace*{0.375in}
      \end{center}
      \begin{center}
@@ -221,7 +221,7 @@
          ~in~\\[18pt]%
          \uppercase\expandafter{\@department} \\[18pt]
          \@graddate\\[18pt]
-         Approved by\\
+         Approved by:\\
      \vspace*{0.3in}
      \end{center}
         \begin{center}
@@ -299,6 +299,17 @@
 \renewcommand{\cftfigaftersnum}{.}
 \renewcommand{\cfttabaftersnum}{.}
 
+%% ... added (2021/02/18,koh) - begin ...
+
+\renewcommand{\cftchapafterpnum}{\vskip10pt}
+\renewcommand{\cftsecafterpnum}{\vskip10pt}
+\renewcommand{\cftsubsecafterpnum}{\vskip10pt}
+\renewcommand{\cftsubsubsecafterpnum}{\vskip10pt}
+\renewcommand{\cftfigafterpnum}{\vskip10pt}
+\renewcommand{\cfttabafterpnum}{\vskip10pt}
+
+%% ... end (2021/02/18,koh) ...
+
 \cftsetrmarg{0.5in}
 
 \newcommand{\Thesistocentry}[1]{%
@@ -318,7 +329,7 @@
       \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{\ \hfill Page}}
-  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
+  \singlespacing\setlength{\parskip}{10\p@}
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
@@ -341,7 +352,7 @@
             {\uppercase{\listfigurename}}}%
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{Figure \ \hfill Page}}
-  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
+  \singlespacing\setlength{\parskip}{10\p@}
   \@starttoc{lof}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
@@ -360,7 +371,7 @@
     \@mkboth{\uppercase{\listtablename}}{\uppercase{\listtablename}}}%
   \vspace*{-0.375in}
   \hbox to \textwidth{{} \hspace*{-2mm}{Table \ \hfill Page}}
-  %\singlespacing\setlength{\parskip}{10\p@} % commented line (2021/02/18,koh)
+  \singlespacing\setlength{\parskip}{10\p@}
   \@starttoc{lot}%
   \if@restonecol\twocolumn\fi
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
@@ -418,8 +429,14 @@
 \newenvironment{ThesisOnlyChapters}[2]{%
    \setboolean{lofHeading}{#1}%
    \setboolean{lotHeading}{#2}%
-   \ifthenelse{\boolean{lofHeading}}{\ThesisListofEntry{lof}{SECTION}}{}%
-   \ifthenelse{\boolean{lotHeading}}{\ThesisListofEntry{lot}{SECTION}}{}%
+   \ifthenelse{\boolean{lofHeading}}{%
+     \ThesisListofEntry{lof}{SECTION}%
+     \addtocontents{lof}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+   }{}%
+   \ifthenelse{\boolean{lotHeading}}{%
+     \ThesisListofEntry{lot}{SECTION}%
+     \addtocontents{lot}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+   }{}%
    \setboolean{firstThesisOnlyChapter}{true}}{}
 
 \newcommand{\ThesisListofEntry}[2]{%
@@ -431,15 +448,19 @@
   \ifthenelse{\equal{#1}{I}}
     {\chapter*{PAPER \\ \ \\ \ \\ \ \\ \ \\#1. #2}}
     {\chapter*{#1. #2}}%
-  \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#2}%
-  \ThesisListofEntry{lof}{PAPER #1}%
-  \ThesisListofEntry{lot}{PAPER #1}%
-   \setcounter{section}{0}
-   \setcounter{figure}{0}
-   \setcounter{table}{0}
-   \setcounter{equation}{0}
+    \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#2}%
+    \addtocontents{toc}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    \ThesisListofEntry{lof}{PAPER #1}%
+    \addtocontents{lof}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    \ThesisListofEntry{lot}{PAPER #1}%
+    \addtocontents{lot}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    \setcounter{section}{0}
+    \setcounter{figure}{0}
+    \setcounter{table}{0}
+    \setcounter{equation}{0}
 }
-\newcommand{\ThesisPaperAuthor}[1]{\begin{center}#1\end{center}}
+\newcommand{\ThesisPaperAuthor}[1]{%
+  \begin{center}\singlespacing#1\end{center}}
 \newcommand{\ThesisPaperKeywords}[1]{\noindent\textbf{Keywords:} #1}
 \newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 \newenvironment{ThesisPaperAbstract}%
@@ -453,7 +474,7 @@
    {\titleformat{\chapter}[display]
       {\singlespacing\center\normalsize\bfseries}
       {\MakeUppercase{SECTION}}
-      {3\baselineskip}
+      {3\baselineskip} % ... desired spacing (2021/03/12,koh)
       {\normalsize\thechapter. }
     \titleformat{name=\chapter,numberless}[display]
       {\singlespacing\center\normalsize\bfseries\uppercase}
@@ -474,9 +495,11 @@
                          \refstepcounter{chapter}%
                          \typeout{\@chapapp\space\thechapter.}%
                          \addcontentsline{toc}{chapter}%
-                                   {\protect\numberline{\thechapter.}#1}%
+                         {\protect\numberline{\thechapter.}#1}%
+      \addtocontents{toc}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
                     \else
-                      \addcontentsline{toc}{chapter}{#1}%
+                    \addcontentsline{toc}{chapter}{#1}%
+      \addtocontents{toc}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
                     \fi
                     \chaptermark{#1}%
                     \ifthenelse{\value{page}=1}{\thispagestyle{empty}}{}
@@ -500,7 +523,7 @@
       \leavevmode %\bfseries
       \advance\leftskip\@tempdima
       \hskip -\leftskip
-      \uppercase{#1}\nobreak \dotfill \nobreak\hbox to\@pnumwidth{\hss #2}\par
+    \uppercase{#1}\nobreak \dotfill \nobreak\hbox to\@pnumwidth{\hss #2}\par
       \penalty\@highpenalty
     \endgroup
   \fi}
