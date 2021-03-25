@@ -88,10 +88,10 @@
 \RequirePackage{titlesec}[2019/10/16]
 \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
   {\thechapter.}{.5em}{}[\doublespacing]
-\titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
+\titlespacing{\chapter}{0pt}{-0.4375in}{0.4375in}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
-\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsection}{\parindent}{\parskip}{0pt}
@@ -401,7 +401,7 @@
   {\thesection.}{.5em}{}[\doublespacing]
 \titleformat{\subsection}{\singlespacing\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[\doublespacing]
-\titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
   {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
@@ -414,7 +414,7 @@
     {SECTION\ \hfill}}}
 \titleformat{\section}{\singlespacing\normalsize\bfseries\uppercase}%
   {\thesection.}{.5em}{}[\doublespacing]
-\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}%
   {\thesubsection.}{0.5em}{}[.\hspace{0.5em}~]
 \titlespacing{\subsection}{\parindent}{\parskip}{0pt}
@@ -486,7 +486,7 @@
   \setboolean{firstThesisOnlyChapter}{false}
   \titleformat{\chapter}{\singlespacing\center\normalsize\bfseries\uppercase}%
     {\thechapter.}{.5em}{}[\doublespacing]
-  \titlespacing{\chapter}{0pt}{-0.4375in}{0.6875in}
+  \titlespacing{\chapter}{0pt}{-0.4375in}{0.4375in}
 }
 
 \newcommand{\ThesisAppendixChapter}[1]{\chapter{#1}}
@@ -547,14 +547,14 @@
      \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}%
      \titleformat{\chapter}{\center\normalsize\bfseries\uppercase}%
         {}{.5em}{APPENDIX  \\ \vspace*{0.125in}\ \\ \center}%
-     \titlespacing{\chapter}{0pt}{-0.59375in}{0.6875in}%
+     \titlespacing{\chapter}{0pt}{-0.59375in}{0.4375in}%
      \renewcommand{\thesection}{\arabic{section}}%
      \titleformat{\section}{\normalsize\bfseries\uppercase}%
         {\thesection.}{.5em}{}%
      \titleformat{\subsection}[runin]{\normalsize\bfseries}%
         {\thesection.\arabic{subsection}.}{0.5em}%
         {}[.\hspace{0.5em}~]%
-     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
      \titleformat{\subsubsection}[runin]%
        {\normalsize\bfseries}%
        {\thesection.\arabic{subsection}.\arabic{subsubsection}.}%
@@ -564,7 +564,8 @@
      \titleformat{\chapter}%[block]%
        {\vspace*{\stretch{1}}\center\normalsize\bfseries\uppercase}%
        {APPENDIX \thechapter.}{0em}%
-       {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
+ %      {\\~\\\nopagenumber}[\vspace*{\stretch{1}}\newpage]
+       {\\ \nopagenumber}[\vspace*{\stretch{1}}\newpage] %(2021/03/25,koh)
  %      {\\~\\\hspace{-1in}\nopagenumber}[\vspace*{\stretch{1}}\newpage]
      %\titlespacing{\chapter}{0pt}{-0.5in}{0.6875in}
      \setcounter{secnumdepth}{4}% ... 4 = number paragraph headings ...
@@ -575,7 +576,7 @@
      \titleformat{\subsection}%
        {\singlespacing\normalsize\bfseries\uppercase}%
        {\thesubsection.}{0.5em}{}[\doublespacing]%
-     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+     \titlespacing{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
      \titleformat{\subsubsection}[runin]{\normalsize\bfseries}%
        {\thesubsubsection.}{0.5em}{}[.\hspace{0.5em}~]%
      \titlespacing{\subsubsection}{\parindent}{\parskip}{0pt}
@@ -591,13 +592,14 @@
 
 \newenvironment{ThesisBibliography}[1]{%
   \renewcommand{\bibname}{REFERENCES}
- %\chapter*{#1} % ... added by koh ...
+  %\chapter*{#1} % ... added by koh ...
   \clearpage\addcontentsline{toc}{chapter}{#1}%
 }{}
 
 \newenvironment{ThesisPaperBibliography}[1]{%
- \renewcommand{\bibname}{REFERENCES}
- %\section*{#1} % ... added by koh ...
+  \renewcommand{\bibname}{REFERENCES}
+  \titlespacing{\section}{0pt}{3.5ex plus 1ex minus .2ex}{3.5ex plus .2ex}
+  %\section*{#1} % ... added by koh ...
       \addcontentsline{toc}{section}{#1}%
 }{}
 
