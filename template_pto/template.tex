@@ -10,7 +10,8 @@
 \usepackage{psfrag}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
-\makenomenclature
+  \setlength{\nomitemsep}{\parsep}
+  \makenomenclature
 \usepackage[sectionbib]{chapterbib}
 
 \bibliographystyle{plainnat}
@@ -101,6 +102,7 @@ Joseph Fourier}
 \tableofcontents
 \listoffigures
 \listoftables
+\listofsymbols{false}
 \end{ThesisFrontMatter}
 
  % ... introduction chapter ...
@@ -114,12 +116,18 @@ Joseph Fourier}
 \end{ThesisOnlyChapters}
 
  % ... thesis publications ...
+ % Note for PaperManuscript command:
+ % #2 argument is true/false for presence of figures/illustrations
+ % #3 argument is true/false for presence of tables
 
 \begin{ThesisPublications}
-\PaperManuscript{I}{FIRST PAPER WITH NO REFERENCES BUT REALLY LONG %
-TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprone}
-\PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprtwo}
-\PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprthree}
+\PaperManuscript{I}{true}{true}{FIRST PAPER WITH NO REFERENCES BUT %
+    REALLY LONG TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}
+  \cbinput{pprone}
+\PaperManuscript{II}{true}{true}{SECOND PAPER TITLE}%
+  \cbinput{pprtwo}
+\PaperManuscript{III}{true}{true}{THIRD PAPER TITLE}%
+  \cbinput{pprthree}
 \end{ThesisPublications}
 
  % ... conclusions chapter ...

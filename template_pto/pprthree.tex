@@ -31,7 +31,8 @@
 \usepackage[numbers]{natbib}
 \setlength{\bibhang}{0.5in}
 \usepackage[noprefix]{nomencl}
-\makenomenclature
+  \setlength{\nomitemsep}{\parsep}
+  \makenomenclature
 
 \newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
 \newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
@@ -88,7 +89,8 @@ This is my simple equation
 where $\delta$ is the thermocline
 thickness %
 \nomenclature[at]{$t$}{time}%
-\nomenclature[gd]{$\delta$}{thermocline thickness}%
+\nomenclature[gd]{$\delta$}{thermocline thickness, a variable definition
+  with a really long description to verify formatting}%
 \nomenclature[si]{$i$}{inlet}%
 defined previously by \citep{winkle.1991} and
 \citet{bullwinkle.1990}. \lipsum[57-60]

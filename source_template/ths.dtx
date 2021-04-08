@@ -244,7 +244,7 @@ Joseph Fourier}
 \tableofcontents 
 \listoffigures 
 \listoftables  
-\listofsymbols
+\listofsymbols{false}
 \end{ThesisFrontMatter}
 %    \end{macrocode}
 %
@@ -417,7 +417,8 @@ Joseph Fourier}
 \usepackage{psfrag}
 \usepackage{threeparttable}
 \usepackage[noprefix]{nomencl}
-\makenomenclature
+  \setlength{\nomitemsep}{\parsep}
+  \makenomenclature
 \usepackage[sectionbib]{chapterbib}
 
 \bibliographystyle{plainnat}
@@ -523,6 +524,7 @@ Joseph Fourier}
 \tableofcontents
 \listoffigures
 \listoftables
+\listofsymbols{false}
 \end{ThesisFrontMatter}
 
 %    \end{macrocode}
@@ -541,12 +543,18 @@ Joseph Fourier}
 \end{ThesisOnlyChapters}
 
  % ... thesis publications ...
+ % Note for PaperManuscript command:
+ % #2 argument is true/false for presence of figures/illustrations
+ % #3 argument is true/false for presence of tables
 
 \begin{ThesisPublications}
-\PaperManuscript{I}{FIRST PAPER WITH NO REFERENCES BUT REALLY LONG %
-TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}\cbinput{pprone}
-\PaperManuscript{II}{SECOND PAPER TITLE}\cbinput{pprtwo}
-\PaperManuscript{III}{THIRD PAPER TITLE}\cbinput{pprthree}
+\PaperManuscript{I}{true}{true}{FIRST PAPER WITH NO REFERENCES BUT %
+    REALLY LONG TITLE IN ORDER TO BE SURE IT IS CORRECTLY FORMATTED}
+  \cbinput{pprone}
+\PaperManuscript{II}{true}{true}{SECOND PAPER TITLE}%
+  \cbinput{pprtwo}
+\PaperManuscript{III}{true}{true}{THIRD PAPER TITLE}%
+  \cbinput{pprthree}
 \end{ThesisPublications}
 
  % ... conclusions chapter ...
@@ -929,7 +937,8 @@ generally appear at the top of the page in a final manuscript.
 \usepackage[numbers]{natbib}
 \setlength{\bibhang}{0.5in}
 \usepackage[noprefix]{nomencl}
-\makenomenclature
+  \setlength{\nomitemsep}{\parsep}
+  \makenomenclature
 
 \newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
 \newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
@@ -971,7 +980,7 @@ generally appear at the top of the page in a final manuscript.
 
  % ... nomenclature - do not edit ...
 
-%\frontglossary
+% \frontglossary
 
  % ... introduction ...
 
@@ -993,7 +1002,8 @@ This is my simple equation
 where $\delta$ is the thermocline
 thickness %
 \nomenclature[at]{$t$}{time}%
-\nomenclature[gd]{$\delta$}{thermocline thickness}%
+\nomenclature[gd]{$\delta$}{thermocline thickness, a variable definition
+  with a really long description to verify formatting}%
 \nomenclature[si]{$i$}{inlet}%
 defined previously by \citep{winkle.1991} and
 \citet{bullwinkle.1990}. \lipsum[57-60]

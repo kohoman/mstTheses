@@ -28,10 +28,15 @@ ptoths : $(foo).tex $(bibs)
 	make nonlo
 	touch ptoths
        
-$(foo).pdf : $(foo).tex $(bibs)
+ptonom : $(foo).tex $(bibs)
+	mv $(foo).tex o$(foo).tex
+	sed "s/bib]{chap/bib,draft]{chap/"  o$(foo).tex > $(foo).tex
 	pdflatex $(foo).tex
+	-bibtex $(foo)
+	bibtex pprtwo
+	bibtex pprthree
+	mv o$(foo).tex $(foo).tex
 	makeindex $(foo).nlo -s nomencl.ist -o $(foo).nls
-	bibtex $(foo)
 	pdflatex $(foo).tex
 	pdflatex $(foo).tex
 
@@ -100,6 +105,7 @@ clean :
 
 help : 
 	@echo "make ptoths -> generate ptoths pdf from tex"
+	@echo "make ptonom -> generate ptoths with nom los"
 	@echo "make nobib  -> generate pdf from tex (no bib, nlo)"
 	@echo "make nonlo  -> generate pdf from tex (bib, no nlo)"
 	@echo "make min    -> generate pdf from tex (no bib or nlo)"

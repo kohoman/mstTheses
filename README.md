@@ -1,6 +1,26 @@
 # mstTheses
 Missouri S&amp;T Thesis Class and Templates
 
+----- ----- ----- -----
+
+PTO List of I/T Headings and Nomenclature (2021/04/08)
+
+To simplify the inclusion (or not) of Paper X headings in the List of
+Illustrations and the List of Tables, for the PTO thesis/dissertation,
+the PaperManuscript command has
+been modified to include two mandatory arguments, both true/false,
+which either write the heading to the respect "list of" or prevent it
+from being written.  This should be selected by the user based upon
+whether illustrations and tables are or are not present in a specific
+PaperManuscript chapter.
+
+In addition, a true/false argument was added to the listofsymbols
+command to allow for specification, from within the template, of
+whether it is to be included or not.  Note that even if the argument
+is set to true, the compile process will need to change so as to allow
+LaTeX to produce the Nomenclature list.  This command redefinition
+applies to both the report-class and publication-option
+theses/dissertations. 
 
 ----- ----- ----- -----
 

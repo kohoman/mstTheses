@@ -685,11 +685,16 @@
   \setlength{\parskip}{0pt}\doublespacing% ... added by koh ...
   }
 
-\newcommand{\listofsymbols}{%
+\newcommand{\listofsymbols}[1]{%
+  \ifthenelse{\equal{#1}{true}}%
+  {% ... then definition if true ...    
   \newpage%
   \addcontentsline{toc}{chapter}{NOMENCLATURE}%
   \renewcommand{\nomname}{NOMENCLATURE}%
+  \singlespacing
   \printnomenclature%
+}{% ... else definition if false ...
+}
 }
 
 %    \end{macrocode}
@@ -815,16 +820,27 @@
 % manuscript (publication) chapter to restart the numbering from one.
 %
 %    \begin{macrocode}
-\newcommand{\PaperManuscript}[2]{%
+\newcommand{\PaperManuscript}[4]{%
+    \setboolean{lofHeading}{#2}%
+    \setboolean{lotHeading}{#3}%
   \ifthenelse{\equal{#1}{I}}
-    {\chapter*{PAPER \\ \ \\ \ \\ \ \\ \ \\#1. #2}}
-    {\chapter*{#1. #2}}%
-    \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#2}%
+    %% ... then_txt ...
+       {\chapter*{PAPER \\ \ \\ \ \\ \ \\ \ \\#1. #4}}
+    %% ... else_txt ...
+    {\chapter*{#1. #4}}%
+    \addcontentsline{toc}{chapter}{\protect\numberline{#1.}#4}%
     \addtocontents{toc}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
-    \ThesisListofEntry{lof}{PAPER #1}%
-    \addtocontents{lof}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
-    \ThesisListofEntry{lot}{PAPER #1}%
-    \addtocontents{lot}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    %% ... lof Paper heading ...
+    \ifthenelse{\boolean{lofHeading}}{%
+      \ThesisListofEntry{lof}{PAPER #1}%
+      \addtocontents{lof}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    }{}%
+    %% ... lot Paper heading ...    
+    \ifthenelse{\boolean{lotHeading}}{%
+      \ThesisListofEntry{lot}{PAPER #1}%
+      \addtocontents{lot}{\protect\addvspace{10\p@}}% (2021/02/20,koh)
+    }{}%
+    %% ... reset counter values ...
     \setcounter{section}{0}
     \setcounter{figure}{0}
     \setcounter{table}{0}
