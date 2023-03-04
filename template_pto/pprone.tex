@@ -26,10 +26,14 @@
 \usepackage[nopar]{lipsum}
 \usepackage{graphicx}
 \usepackage{threeparttable}
+\usepackage[numbers, sort]{natbib}
+\setlength{\bibhang}{0.5in}
+\usepackage[sectionbib]{chapterbib}
 
 \newcommand{\ThesisPaperAuthor}[1]{\title{#1}}
 \newenvironment{ThesisPaperAbstract}{\begin{abstract}}{\end{abstract}}
 \newcommand{\ThesisPaperKeywords}[1]{\textbf{Keywords:} #1}
+\newcommand{\ThesisPaperReferences}[1]{\bibliography{#1}}
 
 \begin{document}
 
@@ -149,8 +153,12 @@ generally appear at the top of the page in a final manuscript.
 
  % ... references - bib files ...
 
- %\bibliographystyle{plainnat}
- %\ThesisPaperReferences{add}
+\bibliographystyle{plainnat} % ... mstogs-auy or mstogs-num ...
+\begin{ThesisPaperBibliography}{REFERENCES}
+\singlespacing
+\ThesisPaperReferences{add}
+\end{ThesisPaperBibliography}
+
 
  % ... end ...
 
